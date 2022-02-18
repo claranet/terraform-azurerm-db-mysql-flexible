@@ -21,3 +21,9 @@ variable "use_caf_naming" {
   type        = bool
   default     = true
 }
+
+variable "use_caf_naming_for_databases" {
+  description = "Use the Azure CAF naming provider to generate databases name."
+  type        = bool
+  default     = false
+}

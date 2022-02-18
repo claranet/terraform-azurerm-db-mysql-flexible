@@ -108,7 +108,7 @@ module "mysql_flex" {
 
 | Name | Version |
 |------|---------|
-| azurecaf | >= 1.2.6 |
+| azurecaf | >= 1.2.12 |
 | azurerm | >= 2.88 |
 | mysql.users\_mgmt | >=1.10.4 |
 | random | >= 2.0 |
@@ -117,12 +117,13 @@ module "mysql_flex" {
 
 | Name | Source | Version |
 |------|--------|---------|
-| diagnostics | claranet/diagnostic-settings/azurerm | 4.0.3 |
+| diagnostics | claranet/diagnostic-settings/azurerm | 5.0.0 |
 
 ## Resources
 
 | Name | Type |
 |------|------|
+| [azurecaf_name.mysql_flexible_databases](https://registry.terraform.io/providers/aztfmod/azurecaf/latest/docs/resources/name) | resource |
 | [azurecaf_name.mysql_flexible_name](https://registry.terraform.io/providers/aztfmod/azurecaf/latest/docs/resources/name) | resource |
 | [azurerm_mysql_flexible_database.mysql_flexible_db](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/mysql_flexible_database) | resource |
 | [azurerm_mysql_flexible_server.mysql_flexible_server](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/mysql_flexible_server) | resource |
@@ -146,6 +147,7 @@ module "mysql_flex" {
 | client\_name | Client name/account used in naming | `string` | n/a | yes |
 | create\_databases\_users | True to create a user named <db>(\_user) per database with generated password. | `bool` | `true` | no |
 | create\_mode | The creation mode which can be used to restore or replicate existing servers | `string` | `"Default"` | no |
+| custom\_diagnostic\_settings\_name | Custom name of the diagnostics settings, name will be 'default' if not set. | `string` | `"default"` | no |
 | custom\_server\_name | Custom Server Name identifier | `string` | `null` | no |
 | databases | Map of databases with default collation and charset | `map(map(string))` | n/a | yes |
 | delegated\_subnet\_id | The ID of the virtual network subnet to create the MySQL Flexible Server | `string` | `null` | no |
@@ -173,6 +175,7 @@ module "mysql_flex" {
 | storage | Map of the storage configuration | <pre>object({<br>    auto_grow_enabled = optional(bool)<br>    iops              = optional(number)<br>    size_gb           = optional(number)<br>  })</pre> | `null` | no |
 | tier | Tier for MySQL flexible server sku. Possible values are: GeneralPurpose, Basic, MemoryOptimized. | `string` | `"GeneralPurpose"` | no |
 | use\_caf\_naming | Use the Azure CAF naming provider to generate default resource name. `custom_server_name` override this if set. Legacy default name is used if this is set to `false`. | `bool` | `true` | no |
+| use\_caf\_naming\_for\_databases | Use the Azure CAF naming provider to generate databases name. | `bool` | `false` | no |
 | user\_suffix | Suffix to append to the created users | `string` | `"_user"` | no |
 
 ## Outputs

@@ -15,5 +15,4 @@ locals {
     "Basic"           = "B"
     "MemoryOptimized" = "MO"
   }
-
 }
