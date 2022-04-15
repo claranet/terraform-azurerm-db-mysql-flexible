@@ -4,7 +4,7 @@ output "mysql_administrator_login" {
 }
 
 output "mysql_administrator_password" {
-  description = "Administrator password for mysql server"
+  description = "Administrator password for MySQL server"
   value       = local.administrator_password
   sensitive   = true
 }
@@ -20,12 +20,12 @@ output "mysql_flexible_databases_names" {
 }
 
 output "mysql_flexible_database_ids" {
-  description = "The list of all database resource ids"
+  description = "The list of all database resource IDs"
   value       = [for db in azurerm_mysql_flexible_database.mysql_flexible_db : db.id]
 }
 
 output "mysql_flexible_firewall_rule_ids" {
-  description = "Map of MySQL created rules"
+  description = "Map of MySQL created firewall rules"
   value       = azurerm_mysql_flexible_server_firewall_rule.firewall_rules
 }
 
@@ -45,7 +45,7 @@ output "mysql_flexible_server_name" {
 }
 
 output "mysql_flexible_vnet_rules" {
-  description = "The map of all vnet rules"
+  description = "The map of all VNet rules"
   value       = azurerm_mysql_virtual_network_rule.vnet_rules
 }
 
@@ -55,7 +55,7 @@ output "mysql_flexible_server_users" {
 }
 
 output "mysql_flexible_server_users_passwords" {
-  description = "List of created users' passwords"
+  description = "List of created users passwords"
   value       = { for db, c in var.databases : db => random_password.db_passwords[db].result if length(random_password.db_passwords) > 0 }
   sensitive   = true
 }
@@ -68,5 +68,4 @@ output "mysql_flexible_server_replica_capacity" {
 output "mysql_flexible_server_public_network_access_enabled" {
   description = "Is the public network access enabled"
   value       = azurerm_mysql_flexible_server.mysql_flexible_server.public_network_access_enabled
-
 }

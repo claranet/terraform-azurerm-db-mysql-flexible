@@ -19,7 +19,6 @@ resource "azurerm_mysql_flexible_server" "mysql_flexible_server" {
 
   private_dns_zone_id = var.private_dns_zone_id
 
-
   dynamic "high_availability" {
     for_each = toset(var.high_availability != null ? [var.high_availability] : [])
 

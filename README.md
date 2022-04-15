@@ -1,4 +1,4 @@
-# # Azure Database for MySQL Flexible Server
+# Azure Database for MySQL Flexible Server
 
 Azure Managed DB - MySQL flexible
 <!-- BEGIN_TF_DOCS -->
@@ -6,7 +6,7 @@ Azure Managed DB - MySQL flexible
 [![Changelog](https://img.shields.io/badge/changelog-release-green.svg)](CHANGELOG.md) [![Notice](https://img.shields.io/badge/notice-copyright-yellow.svg)](NOTICE) [![Apache V2 License](https://img.shields.io/badge/license-Apache%20V2-orange.svg)](LICENSE) [![TF Registry](https://img.shields.io/badge/terraform-registry-blue.svg)](https://registry.terraform.io/modules/claranet/db-mysql-flexible/azurerm/)
 
 This Terraform module creates an [Azure MySQL flexible server](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/mysql_flexible_server)
-with [databases](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/mysql_flexible_database)  and associated admin users along with logging activated and
+with [databases](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/mysql_flexible_database) and associated admin users along with logging activated and
 [firewall rules](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/mysql_flexible_server_firewall_rule).
 
 <!-- BEGIN_TF_DOCS -->
@@ -141,20 +141,20 @@ module "mysql_flex" {
 |------|-------------|------|---------|:--------:|
 | administrator\_login | MySQL administrator login | `string` | n/a | yes |
 | administrator\_password | MySQL administrator password. If not set, randomly generated | `string` | `null` | no |
-| allowed\_cidrs | Map of authorized cidrs | `map(string)` | n/a | yes |
-| allowed\_subnets | Map of authorized subnet ids | `map(string)` | `{}` | no |
-| backup\_retention\_days | Backup retention days for the server, supported values are between 7 and 35 days | `number` | `10` | no |
+| allowed\_cidrs | Map of authorized CIDRs | `map(string)` | n/a | yes |
+| allowed\_subnets | Map of authorized subnet IDs | `map(string)` | `{}` | no |
+| backup\_retention\_days | Backup retention days for the server, supported values are between `7` and `35` days. | `number` | `10` | no |
 | client\_name | Client name/account used in naming | `string` | n/a | yes |
 | create\_databases\_users | True to create a user named <db>(\_user) per database with generated password. | `bool` | `true` | no |
-| create\_mode | The creation mode which can be used to restore or replicate existing servers | `string` | `"Default"` | no |
+| create\_mode | The creation mode which can be used to restore or replicate existing servers. | `string` | `"Default"` | no |
 | custom\_diagnostic\_settings\_name | Custom name of the diagnostics settings, name will be 'default' if not set. | `string` | `"default"` | no |
 | custom\_server\_name | Custom Server Name identifier | `string` | `null` | no |
-| databases | Map of databases with default collation and charset | `map(map(string))` | n/a | yes |
-| delegated\_subnet\_id | The ID of the virtual network subnet to create the MySQL Flexible Server | `string` | `null` | no |
+| databases | Map of databases with default collation and charset. | `map(map(string))` | n/a | yes |
+| delegated\_subnet\_id | The ID of the virtual network subnet to create the MySQL Flexible Server. | `string` | `null` | no |
 | environment | Project environment | `string` | n/a | yes |
 | extra\_tags | Map of custom tags | `map(string)` | `{}` | no |
-| geo\_redundant\_backup\_enabled | Turn Geo-redundant server backups on/off. Not available for the Basic tier | `bool` | `true` | no |
-| high\_availability | Map of high availability configuration: https://docs.microsoft.com/en-us/azure/postgresql/flexible-server/concepts-high-availability | <pre>object({<br>    mode                      = string<br>    standby_availability_zone = optional(number)<br>  })</pre> | <pre>{<br>  "mode": "SameZone",<br>  "standby_availability_zone": 1<br>}</pre> | no |
+| geo\_redundant\_backup\_enabled | Turn Geo-redundant server backups on/off. Not available for the Basic tier. | `bool` | `true` | no |
+| high\_availability | Map of high availability configuration: https://docs.microsoft.com/en-us/azure/postgresql/flexible-server/concepts-high-availability. | <pre>object({<br>    mode                      = string<br>    standby_availability_zone = optional(number)<br>  })</pre> | <pre>{<br>  "mode": "SameZone",<br>  "standby_availability_zone": 1<br>}</pre> | no |
 | location | Azure location | `string` | n/a | yes |
 | location\_short | Short string for Azure location. | `string` | n/a | yes |
 | logs\_categories | Log categories to send to destinations | `list(string)` | `null` | no |
@@ -162,18 +162,18 @@ module "mysql_flex" {
 | logs\_metrics\_categories | Metrics categories to send to destinations | `list(string)` | `null` | no |
 | logs\_retention\_days | Number of days to keep logs on storage account | `number` | `30` | no |
 | maintenance\_window | Map of maintenance window configuration: https://docs.microsoft.com/en-us/azure/mysql/flexible-server/concepts-maintenance | `map(number)` | `null` | no |
-| mysql\_options | Map of configuration options: https://docs.microsoft.com/fr-fr/azure/mysql/howto-server-parameters#list-of-configurable-server-parameters | `map(string)` | `{}` | no |
-| mysql\_version | Valid values are 5.7 and 8.0.21 | `string` | `"8.0.21"` | no |
+| mysql\_options | Map of configuration options: https://docs.microsoft.com/fr-fr/azure/mysql/howto-server-parameters#list-of-configurable-server-parameters. | `map(string)` | `{}` | no |
+| mysql\_version | MySQL server version. Valid values are `5.7` and `8.0.21` | `string` | `"8.0.21"` | no |
 | name\_prefix | Optional prefix for the generated name | `string` | `""` | no |
 | name\_suffix | Optional suffix for the generated name | `string` | `""` | no |
-| private\_dns\_zone\_id | The ID of the private dns zone to create the MySQL Flexible Server. Changing this forces a new MySQL Flexible Server to be created | `string` | `null` | no |
+| private\_dns\_zone\_id | The ID of the private dns zone to create the MySQL Flexible Server. | `string` | `null` | no |
 | resource\_group\_name | Resource group name | `string` | n/a | yes |
-| size | The size for the MySQL Flexible Server | `string` | `"Standard_D2ds_v4"` | no |
-| source\_server\_id | The resource ID of the source MySQL Flexible Server to be restored | `string` | `null` | no |
+| size | The size for the MySQL Flexible Server. | `string` | `"Standard_D2ds_v4"` | no |
+| source\_server\_id | The resource ID of the source MySQL Flexible Server to be restored. | `string` | `null` | no |
 | ssl\_enforced | Enforce SSL connection | `bool` | `true` | no |
 | stack | Project stack name | `string` | n/a | yes |
 | storage | Map of the storage configuration | <pre>object({<br>    auto_grow_enabled = optional(bool)<br>    iops              = optional(number)<br>    size_gb           = optional(number)<br>  })</pre> | `null` | no |
-| tier | Tier for MySQL flexible server sku. Possible values are: GeneralPurpose, Basic, MemoryOptimized. | `string` | `"GeneralPurpose"` | no |
+| tier | Tier for MySQL flexible server SKU. Possible values are: `GeneralPurpose`, `Basic`, `MemoryOptimized`. | `string` | `"GeneralPurpose"` | no |
 | use\_caf\_naming | Use the Azure CAF naming provider to generate default resource name. `custom_server_name` override this if set. Legacy default name is used if this is set to `false`. | `bool` | `true` | no |
 | use\_caf\_naming\_for\_databases | Use the Azure CAF naming provider to generate databases name. | `bool` | `false` | no |
 | user\_suffix | Suffix to append to the created users | `string` | `"_user"` | no |
@@ -183,19 +183,19 @@ module "mysql_flex" {
 | Name | Description |
 |------|-------------|
 | mysql\_administrator\_login | Administrator login for MySQL server |
-| mysql\_administrator\_password | Administrator password for mysql server |
-| mysql\_flexible\_database\_ids | The list of all database resource ids |
+| mysql\_administrator\_password | Administrator password for MySQL server |
+| mysql\_flexible\_database\_ids | The list of all database resource IDs |
 | mysql\_flexible\_databases | Map of databases infos |
 | mysql\_flexible\_databases\_names | List of databases names |
-| mysql\_flexible\_firewall\_rule\_ids | Map of MySQL created rules |
+| mysql\_flexible\_firewall\_rule\_ids | Map of MySQL created firewall rules |
 | mysql\_flexible\_fqdn | FQDN of the MySQL server |
 | mysql\_flexible\_server\_id | MySQL server ID |
 | mysql\_flexible\_server\_name | MySQL server name |
 | mysql\_flexible\_server\_public\_network\_access\_enabled | Is the public network access enabled |
 | mysql\_flexible\_server\_replica\_capacity | The maximum number of replicas that a primary MySQL Flexible Server can have |
 | mysql\_flexible\_server\_users | List of created users |
-| mysql\_flexible\_server\_users\_passwords | List of created users' passwords |
-| mysql\_flexible\_vnet\_rules | The map of all vnet rules |
+| mysql\_flexible\_server\_users\_passwords | List of created users passwords |
+| mysql\_flexible\_vnet\_rules | The map of all VNet rules |
 <!-- END_TF_DOCS -->
 
 ## Related documentation
