@@ -17,5 +17,5 @@ resource "azurecaf_name" "mysql_flexible_databases" {
   suffixes      = compact([var.client_name, var.location_short, var.environment, local.name_suffix, each.key, var.use_caf_naming ? "" : "mysqlf"])
   use_slug      = var.use_caf_naming
   clean_input   = true
-  separator     = "-"
+  separator     = "_"
 }

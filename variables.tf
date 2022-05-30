@@ -166,3 +166,9 @@ variable "ssl_enforced" {
   type        = bool
   default     = true
 }
+
+variable "zone" {
+  description = "Specifies the Availability Zone in which this MySQL Flexible Server should be located. Possible values are 1, 2 and 3"
+  type        = number
+  default     = 1
+}

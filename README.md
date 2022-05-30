@@ -1,7 +1,6 @@
 # Azure Database for MySQL Flexible Server
 
 Azure Managed DB - MySQL flexible
-<!-- BEGIN_TF_DOCS -->
 
 [![Changelog](https://img.shields.io/badge/changelog-release-green.svg)](CHANGELOG.md) [![Notice](https://img.shields.io/badge/notice-copyright-yellow.svg)](NOTICE) [![Apache V2 License](https://img.shields.io/badge/license-Apache%20V2-orange.svg)](LICENSE) [![TF Registry](https://img.shields.io/badge/terraform-registry-blue.svg)](https://registry.terraform.io/modules/claranet/db-mysql-flexible/azurerm/)
 
@@ -109,7 +108,7 @@ module "mysql_flex" {
 | Name | Version |
 |------|---------|
 | azurecaf | >= 1.2.12 |
-| azurerm | >= 2.88 |
+| azurerm | >= 3.0 |
 | mysql.users\_mgmt | >=1.10.4 |
 | random | >= 2.0 |
 
@@ -177,6 +176,7 @@ module "mysql_flex" {
 | use\_caf\_naming | Use the Azure CAF naming provider to generate default resource name. `custom_server_name` override this if set. Legacy default name is used if this is set to `false`. | `bool` | `true` | no |
 | use\_caf\_naming\_for\_databases | Use the Azure CAF naming provider to generate databases name. | `bool` | `false` | no |
 | user\_suffix | Suffix to append to the created users | `string` | `"_user"` | no |
+| zone | Specifies the Availability Zone in which this MySQL Flexible Server should be located. Possible values are 1, 2 and 3 | `number` | `1` | no |
 
 ## Outputs
 
