@@ -108,8 +108,8 @@ module "mysql_flex" {
 | Name | Version |
 |------|---------|
 | azurecaf | >= 1.2.12 |
-| azurerm | >= 3.0 |
-| mysql.users\_mgmt | >=1.10.4 |
+| azurerm | ~> 3.0 |
+| mysql.users\_mgmt | >= 1.10.4 |
 | random | >= 2.0 |
 
 ## Modules

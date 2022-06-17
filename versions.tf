@@ -1,14 +1,14 @@
 terraform {
-  required_version = ">= 0.14"
+  required_version = ">= 1.1.0"
   experiments      = [module_variable_optional_attrs]
   required_providers {
     azurerm = {
       source  = "hashicorp/azurerm"
-      version = ">= 3.0"
+      version = "~> 3.0"
     }
     mysql = {
       source  = "winebarrel/mysql"
-      version = ">=1.10.4"
+      version = ">= 1.10.4"
     }
     random = {
       source  = "hashicorp/random"
