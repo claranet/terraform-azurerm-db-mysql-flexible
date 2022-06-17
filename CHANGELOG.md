@@ -1,4 +1,4 @@
 # Unreleased
 
 Added
-    * AZ-601: Init Azure Managed MySQL flexible database module
+  * AZ-601: Init Azure Managed MySQL flexible database module
