@@ -193,6 +193,7 @@ module "mysql_flex" {
 | mysql\_flexible\_server\_replica\_capacity | The maximum number of replicas that a primary MySQL Flexible Server can have |
 | mysql\_flexible\_server\_users | List of created users |
 | mysql\_flexible\_server\_users\_passwords | List of created users passwords |
+| terraform\_module | Information about this Terraform module |
 <!-- END_TF_DOCS -->
 
 ## Related documentation

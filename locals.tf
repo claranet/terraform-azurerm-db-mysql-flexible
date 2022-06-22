@@ -5,7 +5,7 @@ locals {
     stack = var.stack
   }
 
-  administrator_login    = format("%s@%s", azurerm_mysql_flexible_server.mysql_flexible_server.administrator_login, azurerm_mysql_flexible_server.mysql_flexible_server.name)
+  administrator_login    = azurerm_mysql_flexible_server.mysql_flexible_server.administrator_login
   administrator_password = coalesce(var.administrator_password, random_password.mysql_administrator_password.result)
 
   user_suffix = var.user_suffix != null ? var.user_suffix : ""
