@@ -72,3 +72,21 @@ module "mysql_flex" {
     foo = "bar"
   }
 }
+
+provider "mysql" {
+  endpoint = format("%s:3306", module.mysql_flex.mysql_flexible_fqdn)
+  username = var.administrator_login
+  password = var.administrator_password
+
+  tls = true
+}
+
+module "mysql_users" {
+  source = "git::ssh://git@git.fr.clara.net/claranet/projects/cloud/azure/terraform/mysql-users.git?ref=AZ-762_init_mysql_users"
+
+  for_each = toset(module.mysql_flex.mysql_flexible_databases_names)
+
+  user_suffix_enabled = true
+  user                = each.key
+  database            = each.key
+}

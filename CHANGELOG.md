@@ -5,6 +5,9 @@ Fixed
 
 # v6.1.0 - 2022-06-24
 
+Breaking
+  * AZ-762: Externalize `mysql-users` as a separated module in a dedicated repo (to create admin users per database)
+
 Changed
   * AZ-788: `ssl_enforce` parameter now also configure mysql server instance
   * AZ-788: don't try to create firewall rules if vnet integration
