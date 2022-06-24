@@ -128,7 +128,6 @@ module "mysql_flex" {
 | [azurerm_mysql_flexible_server.mysql_flexible_server](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/mysql_flexible_server) | resource |
 | [azurerm_mysql_flexible_server_configuration.mysql_flexible_server_config](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/mysql_flexible_server_configuration) | resource |
 | [azurerm_mysql_flexible_server_firewall_rule.firewall_rules](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/mysql_flexible_server_firewall_rule) | resource |
-| [azurerm_mysql_virtual_network_rule.vnet_rules](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/mysql_virtual_network_rule) | resource |
 | [mysql_grant.roles](https://registry.terraform.io/providers/winebarrel/mysql/latest/docs/resources/grant) | resource |
 | [mysql_user.users](https://registry.terraform.io/providers/winebarrel/mysql/latest/docs/resources/user) | resource |
 | [random_password.db_passwords](https://registry.terraform.io/providers/hashicorp/random/latest/docs/resources/password) | resource |
@@ -141,7 +140,6 @@ module "mysql_flex" {
 | administrator\_login | MySQL administrator login | `string` | n/a | yes |
 | administrator\_password | MySQL administrator password. If not set, randomly generated | `string` | `null` | no |
 | allowed\_cidrs | Map of authorized CIDRs | `map(string)` | n/a | yes |
-| allowed\_subnets | Map of authorized subnet IDs | `map(string)` | `{}` | no |
 | backup\_retention\_days | Backup retention days for the server, supported values are between `7` and `35` days. | `number` | `10` | no |
 | client\_name | Client name/account used in naming | `string` | n/a | yes |
 | create\_databases\_users | True to create a user named <db>(\_user) per database with generated password. | `bool` | `true` | no |
@@ -153,7 +151,7 @@ module "mysql_flex" {
 | environment | Project environment | `string` | n/a | yes |
 | extra\_tags | Map of custom tags | `map(string)` | `{}` | no |
 | geo\_redundant\_backup\_enabled | Turn Geo-redundant server backups on/off. Not available for the Basic tier. | `bool` | `true` | no |
-| high\_availability | Map of high availability configuration: https://docs.microsoft.com/en-us/azure/postgresql/flexible-server/concepts-high-availability. | <pre>object({<br>    mode                      = string<br>    standby_availability_zone = optional(number)<br>  })</pre> | <pre>{<br>  "mode": "SameZone",<br>  "standby_availability_zone": 1<br>}</pre> | no |
+| high\_availability | Map of high availability configuration: https://docs.microsoft.com/en-us/azure/mysql/flexible-server/concepts-high-availability. `null` to disable high availability | <pre>object({<br>    mode                      = string<br>    standby_availability_zone = optional(number)<br>  })</pre> | <pre>{<br>  "mode": "SameZone",<br>  "standby_availability_zone": 1<br>}</pre> | no |
 | location | Azure location | `string` | n/a | yes |
 | location\_short | Short string for Azure location. | `string` | n/a | yes |
 | logs\_categories | Log categories to send to destinations | `list(string)` | `null` | no |
@@ -169,7 +167,7 @@ module "mysql_flex" {
 | resource\_group\_name | Resource group name | `string` | n/a | yes |
 | size | The size for the MySQL Flexible Server. | `string` | `"Standard_D2ds_v4"` | no |
 | source\_server\_id | The resource ID of the source MySQL Flexible Server to be restored. | `string` | `null` | no |
-| ssl\_enforced | Enforce SSL connection | `bool` | `true` | no |
+| ssl\_enforced | Enforce SSL connection on MySQL provider and set require\_secure\_transport on MySQL Server | `bool` | `true` | no |
 | stack | Project stack name | `string` | n/a | yes |
 | storage | Map of the storage configuration | <pre>object({<br>    auto_grow_enabled = optional(bool)<br>    iops              = optional(number)<br>    size_gb           = optional(number)<br>  })</pre> | `null` | no |
 | tier | Tier for MySQL flexible server SKU. Possible values are: `GeneralPurpose`, `Basic`, `MemoryOptimized`. | `string` | `"GeneralPurpose"` | no |
@@ -195,7 +193,7 @@ module "mysql_flex" {
 | mysql\_flexible\_server\_replica\_capacity | The maximum number of replicas that a primary MySQL Flexible Server can have |
 | mysql\_flexible\_server\_users | List of created users |
 | mysql\_flexible\_server\_users\_passwords | List of created users passwords |
-| mysql\_flexible\_vnet\_rules | The map of all VNet rules |
+| terraform\_module | Information about this Terraform module |
 <!-- END_TF_DOCS -->
 
 ## Related documentation

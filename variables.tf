@@ -44,12 +44,6 @@ variable "allowed_cidrs" {
   type        = map(string)
 }
 
-variable "allowed_subnets" {
-  description = "Map of authorized subnet IDs"
-  type        = map(string)
-  default     = {}
-}
-
 variable "extra_tags" {
   description = "Map of custom tags"
   type        = map(string)
@@ -122,7 +116,7 @@ variable "source_server_id" {
 }
 
 variable "high_availability" {
-  description = "Map of high availability configuration: https://docs.microsoft.com/en-us/azure/postgresql/flexible-server/concepts-high-availability."
+  description = "Map of high availability configuration: https://docs.microsoft.com/en-us/azure/mysql/flexible-server/concepts-high-availability. `null` to disable high availability"
   type = object({
     mode                      = string
     standby_availability_zone = optional(number)
@@ -162,7 +156,7 @@ variable "user_suffix" {
 }
 
 variable "ssl_enforced" {
-  description = "Enforce SSL connection"
+  description = "Enforce SSL connection on MySQL provider and set require_secure_transport on MySQL Server"
   type        = bool
   default     = true
 }

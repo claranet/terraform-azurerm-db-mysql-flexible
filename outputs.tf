@@ -44,11 +44,6 @@ output "mysql_flexible_server_name" {
   value       = azurerm_mysql_flexible_server.mysql_flexible_server.name
 }
 
-output "mysql_flexible_vnet_rules" {
-  description = "The map of all VNet rules"
-  value       = azurerm_mysql_virtual_network_rule.vnet_rules
-}
-
 output "mysql_flexible_server_users" {
   description = "List of created users"
   value       = { for db, c in var.databases : db => mysql_user.users[db].user if length(mysql_user.users) > 0 }
