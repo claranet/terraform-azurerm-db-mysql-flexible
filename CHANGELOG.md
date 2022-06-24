@@ -1,4 +1,4 @@
-# Unreleased
+# v6.1.0 - 2022-06-24
 
 Changed
   * AZ-788: `ssl_enforce` parameter now also configure mysql server instance
