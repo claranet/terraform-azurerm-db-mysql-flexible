@@ -1,12 +1,14 @@
-# v6.0.1 - 2022-07-01
+# Unreleased
+
+Breaking
+  * AZ-762: Externalize `mysql-users` as a separated module in a dedicated repo (to create admin users per database)
+
+# v6.6.1 - 2022-07-01
 
 Fixed
   * AZ-791: B is Burstable
 
 # v6.1.0 - 2022-06-24
-
-Breaking
-  * AZ-762: Externalize `mysql-users` as a separated module in a dedicated repo (to create admin users per database)
 
 Changed
   * AZ-788: `ssl_enforce` parameter now also configure mysql server instance
