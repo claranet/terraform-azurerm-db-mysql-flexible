@@ -1,3 +1,8 @@
+# Unreleased
+
+Fixed
+  * AZ-791: B is Burstable
+
 # v6.1.0 - 2022-06-24
 
 Changed
