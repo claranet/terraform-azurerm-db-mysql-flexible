@@ -1,4 +1,4 @@
-# Unreleased
+# v6.2.0 - 2022-07-01
 
 Breaking
   * AZ-762: Externalize `mysql-users` as a separated module in a dedicated repo (to create admin users per database)
