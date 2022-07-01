@@ -101,6 +101,25 @@ module "mysql_flex" {
     foo = "bar"
   }
 }
+
+provider "mysql" {
+  endpoint = format("%s:3306", module.mysql_flex.mysql_flexible_fqdn)
+  username = var.administrator_login
+  password = var.administrator_password
+
+  tls = true
+}
+
+module "mysql_users" {
+  source  = "claranet/users/mysql"
+  version = "x.x.x"
+
+  for_each = toset(module.mysql_flex.mysql_flexible_databases_names)
+
+  user_suffix_enabled = true
+  user                = each.key
+  database            = each.key
+}
 ```
 
 ## Providers
@@ -109,7 +128,6 @@ module "mysql_flex" {
 |------|---------|
 | azurecaf | >= 1.2.12 |
 | azurerm | ~> 3.0 |
-| mysql.users\_mgmt | >= 1.10.4 |
 | random | >= 2.0 |
 
 ## Modules
@@ -128,9 +146,6 @@ module "mysql_flex" {
 | [azurerm_mysql_flexible_server.mysql_flexible_server](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/mysql_flexible_server) | resource |
 | [azurerm_mysql_flexible_server_configuration.mysql_flexible_server_config](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/mysql_flexible_server_configuration) | resource |
 | [azurerm_mysql_flexible_server_firewall_rule.firewall_rules](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/mysql_flexible_server_firewall_rule) | resource |
-| [mysql_grant.roles](https://registry.terraform.io/providers/winebarrel/mysql/latest/docs/resources/grant) | resource |
-| [mysql_user.users](https://registry.terraform.io/providers/winebarrel/mysql/latest/docs/resources/user) | resource |
-| [random_password.db_passwords](https://registry.terraform.io/providers/hashicorp/random/latest/docs/resources/password) | resource |
 | [random_password.mysql_administrator_password](https://registry.terraform.io/providers/hashicorp/random/latest/docs/resources/password) | resource |
 
 ## Inputs
@@ -142,7 +157,6 @@ module "mysql_flex" {
 | allowed\_cidrs | Map of authorized CIDRs | `map(string)` | n/a | yes |
 | backup\_retention\_days | Backup retention days for the server, supported values are between `7` and `35` days. | `number` | `10` | no |
 | client\_name | Client name/account used in naming | `string` | n/a | yes |
-| create\_databases\_users | True to create a user named <db>(\_user) per database with generated password. | `bool` | `true` | no |
 | create\_mode | The creation mode which can be used to restore or replicate existing servers. | `string` | `"Default"` | no |
 | custom\_diagnostic\_settings\_name | Custom name of the diagnostics settings, name will be 'default' if not set. | `string` | `"default"` | no |
 | custom\_server\_name | Custom Server Name identifier | `string` | `null` | no |
@@ -173,7 +187,6 @@ module "mysql_flex" {
 | tier | Tier for MySQL flexible server SKU. Possible values are: `GeneralPurpose`, `Basic`, `MemoryOptimized`. | `string` | `"GeneralPurpose"` | no |
 | use\_caf\_naming | Use the Azure CAF naming provider to generate default resource name. `custom_server_name` override this if set. Legacy default name is used if this is set to `false`. | `bool` | `true` | no |
 | use\_caf\_naming\_for\_databases | Use the Azure CAF naming provider to generate databases name. | `bool` | `false` | no |
-| user\_suffix | Suffix to append to the created users | `string` | `"_user"` | no |
 | zone | Specifies the Availability Zone in which this MySQL Flexible Server should be located. Possible values are 1, 2 and 3 | `number` | `1` | no |
 
 ## Outputs
@@ -191,8 +204,6 @@ module "mysql_flex" {
 | mysql\_flexible\_server\_name | MySQL server name |
 | mysql\_flexible\_server\_public\_network\_access\_enabled | Is the public network access enabled |
 | mysql\_flexible\_server\_replica\_capacity | The maximum number of replicas that a primary MySQL Flexible Server can have |
-| mysql\_flexible\_server\_users | List of created users |
-| mysql\_flexible\_server\_users\_passwords | List of created users passwords |
 | terraform\_module | Information about this Terraform module |
 <!-- END_TF_DOCS -->
 

@@ -1,4 +1,9 @@
-# v6.0.1 - 2022-07-01
+# Unreleased
+
+Breaking
+  * AZ-762: Externalize `mysql-users` as a separated module in a dedicated repo (to create admin users per database)
+
+# v6.6.1 - 2022-07-01
 
 Fixed
   * AZ-791: B is Burstable

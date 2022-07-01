@@ -44,17 +44,6 @@ output "mysql_flexible_server_name" {
   value       = azurerm_mysql_flexible_server.mysql_flexible_server.name
 }
 
-output "mysql_flexible_server_users" {
-  description = "List of created users"
-  value       = { for db, c in var.databases : db => mysql_user.users[db].user if length(mysql_user.users) > 0 }
-}
-
-output "mysql_flexible_server_users_passwords" {
-  description = "List of created users passwords"
-  value       = { for db, c in var.databases : db => random_password.db_passwords[db].result if length(random_password.db_passwords) > 0 }
-  sensitive   = true
-}
-
 output "mysql_flexible_server_replica_capacity" {
   description = "The maximum number of replicas that a primary MySQL Flexible Server can have"
   value       = azurerm_mysql_flexible_server.mysql_flexible_server.replica_capacity

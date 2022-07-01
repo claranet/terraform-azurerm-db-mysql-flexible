@@ -143,18 +143,6 @@ variable "storage" {
   default = null
 }
 
-variable "create_databases_users" {
-  description = "True to create a user named <db>(_user) per database with generated password."
-  type        = bool
-  default     = true
-}
-
-variable "user_suffix" {
-  description = "Suffix to append to the created users"
-  type        = string
-  default     = "_user"
-}
-
 variable "ssl_enforced" {
   description = "Enforce SSL connection on MySQL provider and set require_secure_transport on MySQL Server"
   type        = bool

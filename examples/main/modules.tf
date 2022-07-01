@@ -72,3 +72,22 @@ module "mysql_flex" {
     foo = "bar"
   }
 }
+
+provider "mysql" {
+  endpoint = format("%s:3306", module.mysql_flex.mysql_flexible_fqdn)
+  username = var.administrator_login
+  password = var.administrator_password
+
+  tls = true
+}
+
+module "mysql_users" {
+  source  = "claranet/users/mysql"
+  version = "x.x.x"
+
+  for_each = toset(module.mysql_flex.mysql_flexible_databases_names)
+
+  user_suffix_enabled = true
+  user                = each.key
+  database            = each.key
+}
