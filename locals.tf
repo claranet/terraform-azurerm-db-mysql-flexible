@@ -12,7 +12,7 @@ locals {
 
   tier_map = {
     "GeneralPurpose"  = "GP"
-    "Basic"           = "B"
+    "Burstable"       = "B"
     "MemoryOptimized" = "MO"
   }
   default_mysql_options = {
