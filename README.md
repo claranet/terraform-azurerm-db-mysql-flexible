@@ -126,7 +126,7 @@ module "mysql_users" {
 
 | Name | Version |
 |------|---------|
-| azurecaf | >= 1.2.12 |
+| azurecaf | ~> 1.1, >= 1.2.18 |
 | azurerm | ~> 3.0 |
 | random | >= 2.0 |
 
