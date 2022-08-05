@@ -1,7 +1,7 @@
 # Unreleased
 
 Fixed
-  * AZ-786: Upgrade azurecaf to v1.2.18 to fix https://github.com/aztfmod/terraform-provider-azurecaf/issues/162
+  * AZ-786: Upgrade azurecaf to `v1.2.18` to fix https://github.com/aztfmod/terraform-provider-azurecaf/issues/162
 
 # v6.2.0 - 2022-07-01
 
