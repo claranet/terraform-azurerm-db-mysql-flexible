@@ -1,4 +1,4 @@
-# Unreleased
+# v7.1.1 - 2022-12-14
 
 Fixed
   * AZ-937: Fix Firewall Rules condition
