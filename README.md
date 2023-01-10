@@ -155,7 +155,7 @@ module "mysql_users" {
 |------|-------------|------|---------|:--------:|
 | administrator\_login | MySQL administrator login | `string` | n/a | yes |
 | administrator\_password | MySQL administrator password. If not set, randomly generated | `string` | `null` | no |
-| allowed\_cidrs | Map of authorized CIDRs | `map(string)` | n/a | yes |
+| allowed\_cidrs | Map of authorized CIDRs | `map(string)` | `{}` | no |
 | backup\_retention\_days | Backup retention days for the server, supported values are between `7` and `35` days. | `number` | `10` | no |
 | client\_name | Client name/account used in naming | `string` | n/a | yes |
 | create\_mode | The creation mode which can be used to restore or replicate existing servers. | `string` | `"Default"` | no |

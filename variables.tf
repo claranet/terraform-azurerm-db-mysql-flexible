@@ -42,6 +42,7 @@ variable "administrator_password" {
 variable "allowed_cidrs" {
   description = "Map of authorized CIDRs"
   type        = map(string)
+  default     = {}
 }
 
 variable "extra_tags" {

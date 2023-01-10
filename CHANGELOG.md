@@ -1,3 +1,8 @@
+# Unreleased
+
+Fixed
+  * AZ-937: Roll back to original behavior for firewall rules as it prevents deployment from scratch
+
 # v7.1.1 - 2022-12-14
 
 Fixed
