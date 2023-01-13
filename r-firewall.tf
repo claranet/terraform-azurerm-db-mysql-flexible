@@ -1,5 +1,5 @@
 resource "azurerm_mysql_flexible_server_firewall_rule" "firewall_rules" {
-  for_each = var.delegated_subnet_id == null ? var.allowed_cidrs : {}
+  for_each = var.allowed_cidrs
 
   name                = each.key
   resource_group_name = var.resource_group_name
