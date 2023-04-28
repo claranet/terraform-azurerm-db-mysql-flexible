@@ -1,11 +1,11 @@
-location="fr-central"
-location_short="frc"
-environment="test"
-stack="ci"
-client_name="test"
-resource_group_name="rg-test"
-allowed_cidrs={"cidr1" = "192.168.0.0/24", "cidr2" = "192.168.1.0/24"}
-administrator_password="test"
-administrator_login="test"
-databases={"test" =  {"charset": "utf8", "collation": "utf8mb4_unicode_ci"}}
-extra_tags= {"test" = "ci"}
+location               = "fr-central"
+location_short         = "frc"
+environment            = "test"
+stack                  = "ci"
+client_name            = "test"
+resource_group_name    = "rg-test"
+allowed_cidrs          = { "cidr1" = "192.168.0.0/24", "cidr2" = "192.168.1.0/24" }
+administrator_password = "test"
+administrator_login    = "test"
+databases              = { "test" = { "charset" : "utf8", "collation" : "utf8mb4_unicode_ci" } }
+extra_tags             = { "test" = "ci" }
