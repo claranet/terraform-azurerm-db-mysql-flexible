@@ -162,7 +162,7 @@ module "mysql_users" {
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
-| administrator\_login | MySQL administrator login | `string` | n/a | yes |
+| administrator\_login | MySQL administrator login. Required when create\_mode is Default. | `string` | `null` | no |
 | administrator\_password | MySQL administrator password. If not set, randomly generated | `string` | `null` | no |
 | allowed\_cidrs | Map of authorized CIDRs | `map(string)` | `{}` | no |
 | backup\_retention\_days | Backup retention days for the server, supported values are between `7` and `35` days. | `number` | `10` | no |
@@ -170,7 +170,7 @@ module "mysql_users" {
 | create\_mode | The creation mode which can be used to restore or replicate existing servers. | `string` | `"Default"` | no |
 | custom\_diagnostic\_settings\_name | Custom name of the diagnostics settings, name will be 'default' if not set. | `string` | `"default"` | no |
 | custom\_server\_name | Custom Server Name identifier | `string` | `null` | no |
-| databases | Map of databases with default collation and charset. | `map(map(string))` | n/a | yes |
+| databases | Map of databases with default collation and charset. | `map(map(string))` | `{}` | no |
 | delegated\_subnet\_id | The ID of the virtual network subnet to create the MySQL Flexible Server. | `string` | `null` | no |
 | entra\_authentication | Azure Entra authentication configuration block for this Azure MySQL Flexible Server. You have to assign `Directory Readers` Azure Entra role to the User Assigned Identity, see [documentation](https://learn.microsoft.com/en-us/azure/mysql/flexible-server/how-to-azure-ad#configure-the-microsoft-entra-admin). See dedicated [example](examples/entra-auth/modules.tf). | <pre>object({<br>    user_assigned_identity_id = optional(string, null)<br>    login                     = optional(string, null)<br>    object_id                 = optional(string, null)<br>  })</pre> | `{}` | no |
 | environment | Project environment | `string` | n/a | yes |
@@ -188,6 +188,7 @@ module "mysql_users" {
 | mysql\_version | MySQL server version. Valid values are `5.7` and `8.0.21` | `string` | `"8.0.21"` | no |
 | name\_prefix | Optional prefix for the generated name | `string` | `""` | no |
 | name\_suffix | Optional suffix for the generated name | `string` | `""` | no |
+| point\_in\_time\_restore\_time\_in\_utc | The point in time to restore from creation\_source\_server\_id when create\_mode is PointInTimeRestore. Changing this forces a new MySQL Flexible Server to be created. | `string` | `null` | no |
 | private\_dns\_zone\_id | The ID of the private dns zone to create the MySQL Flexible Server. | `string` | `null` | no |
 | resource\_group\_name | Resource group name | `string` | n/a | yes |
 | size | The size for the MySQL Flexible Server. | `string` | `"Standard_D2ds_v4"` | no |

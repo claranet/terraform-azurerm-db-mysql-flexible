@@ -29,8 +29,9 @@ variable "resource_group_name" {
 }
 
 variable "administrator_login" {
-  description = "MySQL administrator login"
+  description = "MySQL administrator login. Required when create_mode is Default."
   type        = string
+  default     = null
 }
 
 variable "administrator_password" {
@@ -84,6 +85,7 @@ variable "backup_retention_days" {
 variable "databases" {
   description = "Map of databases with default collation and charset."
   type        = map(map(string))
+  default     = {}
 }
 
 variable "tier" {
@@ -171,4 +173,10 @@ variable "entra_authentication" {
     object_id                 = optional(string, null)
   })
   default = {}
+}
+
+variable "point_in_time_restore_time_in_utc" {
+  description = "The point in time to restore from creation_source_server_id when create_mode is PointInTimeRestore. Changing this forces a new MySQL Flexible Server to be created."
+  type        = string
+  default     = null
 }
