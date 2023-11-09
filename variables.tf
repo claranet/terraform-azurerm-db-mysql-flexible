@@ -64,7 +64,7 @@ variable "mysql_options" {
 }
 
 variable "geo_redundant_backup_enabled" {
-  description = "Turn Geo-redundant server backups on/off. Not available for the Basic tier."
+  description = "Turn Geo-redundant server backups on/off. Not available for the Burstable tier."
   type        = bool
   default     = true
 }
@@ -87,7 +87,7 @@ variable "databases" {
 }
 
 variable "tier" {
-  description = "Tier for MySQL flexible server SKU. Possible values are: `GeneralPurpose`, `Basic`, `MemoryOptimized`."
+  description = "Tier for MySQL flexible server SKU. Possible values are: `GeneralPurpose`, `Burstable`, `MemoryOptimized`."
   type        = string
   default     = "GeneralPurpose"
 }
