@@ -1,4 +1,4 @@
-# Unreleased
+# v7.2.1 - 2023-11-10
 
 Fixed
   * AZ-1243: Fix documentation about `tier` variable
