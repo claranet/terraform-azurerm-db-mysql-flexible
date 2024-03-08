@@ -1,4 +1,4 @@
-# Unreleased
+# v7.2.2 - 2024-03-08
 
 Fixed
   * AZ-1356: Fix name_prefix in naming
