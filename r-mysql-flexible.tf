@@ -50,6 +50,15 @@ resource "azurerm_mysql_flexible_server" "mysql_flexible_server" {
     }
   }
 
+  dynamic "identity" {
+    for_each = length(var.identity_ids) > 0 ? [1] : []
+
+    content {
+      type         = "UserAssigned"
+      identity_ids = var.identity_ids
+    }
+  }
+
   tags = merge(local.default_tags, var.extra_tags)
 }
 
@@ -76,4 +85,14 @@ resource "random_password" "mysql_administrator_password" {
   length           = 32
   special          = true
   override_special = "@#%&*()-_=+[]{}<>:?"
+}
+
+resource "azurerm_mysql_flexible_server_active_directory_administrator" "main" {
+  count = length(var.entra_authentication.object_id[*]) > 0 ? 1 : 0
+
+  server_id   = azurerm_mysql_flexible_server.mysql_flexible_server.id
+  identity_id = var.entra_authentication.user_assigned_identity_id
+  login       = var.entra_authentication.login
+  object_id   = var.entra_authentication.object_id
+  tenant_id   = data.azurerm_client_config.main.tenant_id
 }
