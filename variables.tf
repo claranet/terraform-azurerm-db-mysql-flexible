@@ -155,3 +155,20 @@ variable "zone" {
   type        = number
   default     = 1
 }
+
+variable "identity_ids" {
+  description = "A list of User Assigned Managed Identity IDs to be assigned to this MySQL Flexible Server."
+  type        = list(string)
+  default     = []
+  nullable    = false
+}
+
+variable "entra_authentication" {
+  description = "Azure Entra authentication configuration block for this Azure MySQL Flexible Server. You have to assign `Directory Readers` Azure Entra role to the User Assigned Identity, see [documentation](https://learn.microsoft.com/en-us/azure/mysql/flexible-server/how-to-azure-ad#configure-the-microsoft-entra-admin). See dedicated [example](examples/entra-auth/modules.tf)."
+  type = object({
+    user_assigned_identity_id = optional(string, null)
+    login                     = optional(string, null)
+    object_id                 = optional(string, null)
+  })
+  default = {}
+}

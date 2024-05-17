@@ -135,7 +135,7 @@ module "mysql_users" {
 | Name | Version |
 |------|---------|
 | azurecaf | ~> 1.2, >= 1.2.22 |
-| azurerm | ~> 3.39 |
+| azurerm | ~> 3.58 |
 | random | >= 2.0 |
 
 ## Modules
@@ -150,11 +150,13 @@ module "mysql_users" {
 |------|------|
 | [azurerm_mysql_flexible_database.mysql_flexible_db](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/mysql_flexible_database) | resource |
 | [azurerm_mysql_flexible_server.mysql_flexible_server](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/mysql_flexible_server) | resource |
+| [azurerm_mysql_flexible_server_active_directory_administrator.main](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/mysql_flexible_server_active_directory_administrator) | resource |
 | [azurerm_mysql_flexible_server_configuration.mysql_flexible_server_config](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/mysql_flexible_server_configuration) | resource |
 | [azurerm_mysql_flexible_server_firewall_rule.firewall_rules](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/mysql_flexible_server_firewall_rule) | resource |
 | [random_password.mysql_administrator_password](https://registry.terraform.io/providers/hashicorp/random/latest/docs/resources/password) | resource |
 | [azurecaf_name.mysql_flexible_databases](https://registry.terraform.io/providers/aztfmod/azurecaf/latest/docs/data-sources/name) | data source |
 | [azurecaf_name.mysql_flexible_name](https://registry.terraform.io/providers/aztfmod/azurecaf/latest/docs/data-sources/name) | data source |
+| [azurerm_client_config.main](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/data-sources/client_config) | data source |
 
 ## Inputs
 
@@ -170,10 +172,12 @@ module "mysql_users" {
 | custom\_server\_name | Custom Server Name identifier | `string` | `null` | no |
 | databases | Map of databases with default collation and charset. | `map(map(string))` | n/a | yes |
 | delegated\_subnet\_id | The ID of the virtual network subnet to create the MySQL Flexible Server. | `string` | `null` | no |
+| entra\_authentication | Azure Entra authentication configuration block for this Azure MySQL Flexible Server. You have to assign `Directory Readers` Azure Entra role to the User Assigned Identity, see [documentation](https://learn.microsoft.com/en-us/azure/mysql/flexible-server/how-to-azure-ad#configure-the-microsoft-entra-admin). See dedicated [example](examples/entra-auth/modules.tf). | <pre>object({<br>    user_assigned_identity_id = optional(string, null)<br>    login                     = optional(string, null)<br>    object_id                 = optional(string, null)<br>  })</pre> | `{}` | no |
 | environment | Project environment | `string` | n/a | yes |
 | extra\_tags | Map of custom tags | `map(string)` | `{}` | no |
 | geo\_redundant\_backup\_enabled | Turn Geo-redundant server backups on/off. Not available for the Burstable tier. | `bool` | `true` | no |
 | high\_availability | Map of high availability configuration: https://docs.microsoft.com/en-us/azure/mysql/flexible-server/concepts-high-availability. `null` to disable high availability | <pre>object({<br>    mode                      = string<br>    standby_availability_zone = optional(number)<br>  })</pre> | <pre>{<br>  "mode": "SameZone",<br>  "standby_availability_zone": 1<br>}</pre> | no |
+| identity\_ids | A list of User Assigned Managed Identity IDs to be assigned to this MySQL Flexible Server. | `list(string)` | `[]` | no |
 | location | Azure location | `string` | n/a | yes |
 | location\_short | Short string for Azure location. | `string` | n/a | yes |
 | logs\_categories | Log categories to send to destinations. | `list(string)` | `null` | no |
@@ -216,4 +220,5 @@ module "mysql_users" {
 
 ## Related documentation
 
-Microsoft Azure documentation: [docs.microsoft.com/fr-fr/azure/mysql/flexible-server/overview](https://docs.microsoft.com/fr-fr/azure/mysql/flexible-server/overview)
+- Microsoft Azure documentation: [docs.microsoft.com/fr-fr/azure/mysql/flexible-server/overview](https://docs.microsoft.com/fr-fr/azure/mysql/flexible-server/overview)
+- Microsoft Azure Entra authentication documentation: [learn.microsoft.com/en-us/azure/mysql/flexible-server/how-to-azure-ad#configure-the-microsoft-entra-admin](https://learn.microsoft.com/en-us/azure/mysql/flexible-server/how-to-azure-ad#configure-the-microsoft-entra-admin)
