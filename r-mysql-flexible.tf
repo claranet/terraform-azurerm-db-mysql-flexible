@@ -17,7 +17,8 @@ resource "azurerm_mysql_flexible_server" "mysql_flexible_server" {
   sku_name    = join("_", [lookup(local.tier_map, var.tier, "GeneralPurpose"), var.size])
   create_mode = var.create_mode
 
-  source_server_id = var.source_server_id
+  source_server_id                  = var.source_server_id
+  point_in_time_restore_time_in_utc = var.point_in_time_restore_time_in_utc
 
   private_dns_zone_id = var.private_dns_zone_id
 
