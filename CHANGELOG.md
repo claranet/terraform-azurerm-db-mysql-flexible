@@ -1,3 +1,22 @@
+## 7.3.0 (2024-05-17)
+
+
+### Features
+
+* **AZ-1196:** add `point_in_time_restore_time_in_utc` 49761fe
+* **AZ-1410:** manage entra authentication f75db2e
+
+
+### Miscellaneous Chores
+
+* **deps:** update dependency opentofu to v1.7.0 31642ef
+* **deps:** update dependency opentofu to v1.7.1 5beaca0
+* **deps:** update dependency pre-commit to v3.7.1 036bc65
+* **deps:** update dependency tflint to v0.51.0 e847232
+* **deps:** update dependency tflint to v0.51.1 11472e2
+* **deps:** update dependency trivy to v0.51.0 6cc54f9
+* **deps:** update dependency trivy to v0.51.1 f2e82eb
+
 ## 7.2.3 (2024-04-26)
 
 
