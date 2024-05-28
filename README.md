@@ -135,7 +135,7 @@ module "mysql_users" {
 | Name | Version |
 |------|---------|
 | azurecaf | ~> 1.2, >= 1.2.22 |
-| azurerm | ~> 3.58 |
+| azurerm | ~> 3.75 |
 | random | >= 2.0 |
 
 ## Modules
@@ -195,7 +195,7 @@ module "mysql_users" {
 | source\_server\_id | The resource ID of the source MySQL Flexible Server to be restored. | `string` | `null` | no |
 | ssl\_enforced | Enforce SSL connection on MySQL provider and set require\_secure\_transport on MySQL Server | `bool` | `true` | no |
 | stack | Project stack name | `string` | n/a | yes |
-| storage | Map of the storage configuration | <pre>object({<br>    auto_grow_enabled = optional(bool)<br>    iops              = optional(number)<br>    size_gb           = optional(number)<br>  })</pre> | `null` | no |
+| storage | Map of the storage configuration | <pre>object({<br>    auto_grow_enabled  = optional(bool, true)<br>    size_gb            = optional(number)<br>    io_scaling_enabled = optional(bool, false)<br>    iops               = optional(number)<br>  })</pre> | `{}` | no |
 | tier | Tier for MySQL flexible server SKU. Possible values are: `GeneralPurpose`, `Burstable`, `MemoryOptimized`. | `string` | `"GeneralPurpose"` | no |
 | use\_caf\_naming | Use the Azure CAF naming provider to generate default resource name. `custom_server_name` override this if set. Legacy default name is used if this is set to `false`. | `bool` | `true` | no |
 | use\_caf\_naming\_for\_databases | Use the Azure CAF naming provider to generate databases name. | `bool` | `false` | no |
