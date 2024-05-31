@@ -1,3 +1,17 @@
+## 7.4.0 (2024-05-31)
+
+
+### Features
+
+* **AZ-1412:** ignore changes on zone parameters + add io_scaling_enabled parameter 0c75810
+
+
+### Miscellaneous Chores
+
+* **deps:** update dependency terraform-docs to v0.18.0 254ae30
+* **deps:** update dependency trivy to v0.51.2 b532861
+* **deps:** update dependency trivy to v0.51.4 1d7f32c
+
 ## 7.3.0 (2024-05-17)
 
 
