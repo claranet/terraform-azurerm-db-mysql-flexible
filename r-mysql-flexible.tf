@@ -45,9 +45,10 @@ resource "azurerm_mysql_flexible_server" "mysql_flexible_server" {
     for_each = toset(var.storage != null ? [var.storage] : [])
 
     content {
-      auto_grow_enabled = lookup(storage.value, "auto_grow_enabled", true)
-      iops              = lookup(storage.value, "iops", 360)
-      size_gb           = lookup(storage.value, "size_gb", 20)
+      auto_grow_enabled  = var.storage.auto_grow_enabled
+      size_gb            = var.storage.size_gb
+      io_scaling_enabled = var.storage.io_scaling_enabled
+      iops               = var.storage.iops
     }
   }
 
@@ -61,6 +62,17 @@ resource "azurerm_mysql_flexible_server" "mysql_flexible_server" {
   }
 
   tags = merge(local.default_tags, var.extra_tags)
+
+  lifecycle {
+    ignore_changes = [
+      zone,
+      high_availability[0].standby_availability_zone,
+    ]
+    precondition {
+      condition     = (var.storage.io_scaling_enabled && var.storage.iops == null) || (!var.storage.io_scaling_enabled && var.storage.iops != null)
+      error_message = "You have to choose between enabling storage auto-scaling IO without defining storage IOPS or disabling storage auto-scaling IO with defined storage IOPS."
+    }
+  }
 }
 
 resource "azurerm_mysql_flexible_database" "mysql_flexible_db" {

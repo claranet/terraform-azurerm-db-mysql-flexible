@@ -139,11 +139,12 @@ variable "maintenance_window" {
 variable "storage" {
   description = "Map of the storage configuration"
   type = object({
-    auto_grow_enabled = optional(bool)
-    iops              = optional(number)
-    size_gb           = optional(number)
+    auto_grow_enabled  = optional(bool, true)
+    size_gb            = optional(number)
+    io_scaling_enabled = optional(bool, false)
+    iops               = optional(number)
   })
-  default = null
+  default = {}
 }
 
 variable "ssl_enforced" {
