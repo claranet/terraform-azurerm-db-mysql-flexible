@@ -199,7 +199,7 @@ module "mysql_users" {
 | tier | Tier for MySQL flexible server SKU. Possible values are: `GeneralPurpose`, `Burstable`, `MemoryOptimized`. | `string` | `"GeneralPurpose"` | no |
 | use\_caf\_naming | Use the Azure CAF naming provider to generate default resource name. `custom_server_name` override this if set. Legacy default name is used if this is set to `false`. | `bool` | `true` | no |
 | use\_caf\_naming\_for\_databases | Use the Azure CAF naming provider to generate databases name. | `bool` | `false` | no |
-| zone | Specifies the Availability Zone in which this MySQL Flexible Server should be located. Possible values are 1, 2 and 3 | `number` | `1` | no |
+| zone | Specifies the Availability Zone in which this MySQL Flexible Server should be located. Possible values are 1, 2 and 3 | `number` | `null` | no |
 
 ## Outputs
 
