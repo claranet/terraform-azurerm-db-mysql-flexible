@@ -1,3 +1,21 @@
+## 7.5.0 (2024-07-05)
+
+
+### Features
+
+* **AZ-1433:** fix zone parameter default value c48e608
+
+
+### Miscellaneous Chores
+
+* **deps:** update dependency opentofu to v1.7.2 f1192cb
+* **deps:** update dependency tflint to v0.51.2 4d9cf93
+* **deps:** update dependency trivy to v0.52.0 3da846d
+* **deps:** update dependency trivy to v0.52.1 35a57c3
+* **deps:** update dependency trivy to v0.52.2 4f78700
+* **deps:** update dependency trivy to v0.53.0 25f0ca2
+* **deps:** update pre-commit hook antonbabenko/pre-commit-terraform to v1.92.0 06937f8
+
 ## 7.4.0 (2024-05-31)
 
 
