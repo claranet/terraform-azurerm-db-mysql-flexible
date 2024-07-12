@@ -1,3 +1,16 @@
+## 7.6.0 (2024-07-12)
+
+
+### Features
+
+* **AZ-1431:** default production configuration options 0cdd762
+
+
+### Miscellaneous Chores
+
+* **deps:** update dependency opentofu to v1.7.3 1517d5f
+* **deps:** update dependency tflint to v0.52.0 e878b0a
+
 ## 7.5.0 (2024-07-05)
 
 
