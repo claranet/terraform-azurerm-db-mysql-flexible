@@ -53,3 +53,8 @@ output "mysql_flexible_server_public_network_access_enabled" {
   description = "Is the public network access enabled"
   value       = azurerm_mysql_flexible_server.mysql_flexible_server.public_network_access_enabled
 }
+
+output "mysql_options" {
+  description = "MySQL server configuration options."
+  value       = local.mysql_options
+}

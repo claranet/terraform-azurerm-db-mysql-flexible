@@ -5,8 +5,27 @@ Azure Managed DB - MySQL flexible
 [![Changelog](https://img.shields.io/badge/changelog-release-green.svg)](CHANGELOG.md) [![Notice](https://img.shields.io/badge/notice-copyright-yellow.svg)](NOTICE) [![Apache V2 License](https://img.shields.io/badge/license-Apache%20V2-orange.svg)](LICENSE) [![TF Registry](https://img.shields.io/badge/terraform-registry-blue.svg)](https://registry.terraform.io/modules/claranet/db-mysql-flexible/azurerm/)
 
 This Terraform module creates an [Azure MySQL flexible server](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/mysql_flexible_server)
-with [databases](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/mysql_flexible_database) and associated admin users along with logging activated and
+with [databases](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/mysql_flexible_database)
+and associated admin users along with logging activated and
 [firewall rules](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/mysql_flexible_server_firewall_rule).
+
+Following MySQL configuration options are set by default and can be overridden with the `mysql_options` variable or
+fully disabled by setting the variable `mysql_recommended_options_enabled` to `false`:
+```
+slow_query_log: ON
+long_query_time: 5
+interactive_timeout: 28800
+wait_timeout: 28800
+innodb_change_buffering: all
+innodb_change_buffer_max_size: 50
+innodb_print_all_deadlocks: ON
+max_allowed_packet: 1073741824 # 1GB
+explicit_defaults_for_timestamp: OFF
+sql_mode: ERROR_FOR_DIVISION_BY_ZERO,STRICT_TRANS_TABLES
+sql_generate_invisible_primary_key: OFF # MySQL 8 only
+transaction_isolation: READ-COMMITTED
+```
+MySQL options for SSL and audit logs can be respectively enabled with the `ssl_enforced` and `mysql_audit_logs_enabled` variables.
 
 <!-- BEGIN_TF_DOCS -->
 ## Global versioning rule for Claranet Azure modules
@@ -184,7 +203,9 @@ module "mysql_users" {
 | logs\_destinations\_ids | List of destination resources IDs for logs diagnostic destination.<br>Can be `Storage Account`, `Log Analytics Workspace` and `Event Hub`. No more than one of each can be set.<br>If you want to specify an Azure EventHub to send logs and metrics to, you need to provide a formated string with both the EventHub Namespace authorization send ID and the EventHub name (name of the queue to use in the Namespace) separated by the `|` character. | `list(string)` | n/a | yes |
 | logs\_metrics\_categories | Metrics categories to send to destinations. | `list(string)` | `null` | no |
 | maintenance\_window | Map of maintenance window configuration: https://docs.microsoft.com/en-us/azure/mysql/flexible-server/concepts-maintenance | `map(number)` | `null` | no |
-| mysql\_options | Map of configuration options: https://docs.microsoft.com/fr-fr/azure/mysql/howto-server-parameters#list-of-configurable-server-parameters. | `map(string)` | `{}` | no |
+| mysql\_audit\_logs\_enabled | Whether MySQL audit logs are enabled. Categories `CONNECTION`, `ADMIN`, `CONNECTION_V2`, `DCL`, `DDL`, `DML`, `DML_NONSELECT`, `DML_SELECT`, `GENERAL` and `TABLE_ACCESS` are set by default when enabled<br>  and can be overridden with variable `mysql_options`. See https://learn.microsoft.com/en-us/azure/mysql/flexible-server/concepts-audit-logs#configure-audit-logging." | `bool` | `false` | no |
+| mysql\_options | Map of MySQL configuration options: https://dev.mysql.com/doc/refman/8.0/en/server-system-variables.html. See README file for defaults. | `map(string)` | `{}` | no |
+| mysql\_recommended\_options\_enabled | Whether this module recommended MySQL options are set. | `bool` | `true` | no |
 | mysql\_version | MySQL server version. Valid values are `5.7` and `8.0.21` | `string` | `"8.0.21"` | no |
 | name\_prefix | Optional prefix for the generated name | `string` | `""` | no |
 | name\_suffix | Optional suffix for the generated name | `string` | `""` | no |
@@ -216,6 +237,7 @@ module "mysql_users" {
 | mysql\_flexible\_server\_name | MySQL server name |
 | mysql\_flexible\_server\_public\_network\_access\_enabled | Is the public network access enabled |
 | mysql\_flexible\_server\_replica\_capacity | The maximum number of replicas that a primary MySQL Flexible Server can have |
+| mysql\_options | MySQL server configuration options. |
 | terraform\_module | Information about this Terraform module |
 <!-- END_TF_DOCS -->
 
