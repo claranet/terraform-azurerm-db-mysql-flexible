@@ -59,9 +59,26 @@ variable "mysql_version" {
 }
 
 variable "mysql_options" {
-  description = "Map of configuration options: https://docs.microsoft.com/fr-fr/azure/mysql/howto-server-parameters#list-of-configurable-server-parameters."
+  description = "Map of MySQL configuration options: https://dev.mysql.com/doc/refman/8.0/en/server-system-variables.html. See README file for defaults."
   type        = map(string)
   default     = {}
+}
+
+variable "mysql_recommended_options_enabled" {
+  description = "Whether this module recommended MySQL options are set."
+  type        = bool
+  nullable    = false
+  default     = true
+}
+
+variable "mysql_audit_logs_enabled" {
+  description = <<EOD
+  Whether MySQL audit logs are enabled. Categories `CONNECTION`, `ADMIN`, `CONNECTION_V2`, `DCL`, `DDL`, `DML`, `DML_NONSELECT`, `DML_SELECT`, `GENERAL` and `TABLE_ACCESS` are set by default when enabled
+  and can be overridden with variable `mysql_options`. See https://learn.microsoft.com/en-us/azure/mysql/flexible-server/concepts-audit-logs#configure-audit-logging."
+EOD
+  type        = bool
+  default     = false
+  nullable    = false
 }
 
 variable "geo_redundant_backup_enabled" {

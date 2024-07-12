@@ -86,7 +86,7 @@ resource "azurerm_mysql_flexible_database" "mysql_flexible_db" {
 }
 
 resource "azurerm_mysql_flexible_server_configuration" "mysql_flexible_server_config" {
-  for_each = merge(local.default_mysql_options, var.mysql_options)
+  for_each = local.mysql_options
 
   name                = each.key
   resource_group_name = var.resource_group_name
