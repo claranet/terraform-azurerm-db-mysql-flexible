@@ -1,5 +1,5 @@
 variable "location" {
-  description = "Azure location"
+  description = "Azure location."
   type        = string
 }
 
@@ -9,72 +9,66 @@ variable "location_short" {
 }
 
 variable "client_name" {
-  description = "Client name/account used in naming"
+  description = "Client name/account used in naming."
   type        = string
 }
 
 variable "environment" {
-  description = "Project environment"
+  description = "Project environment."
   type        = string
 }
 
 variable "stack" {
-  description = "Project stack name"
+  description = "Project stack name."
   type        = string
 }
 
 variable "resource_group_name" {
-  description = "Resource group name"
+  description = "Resource Group name."
   type        = string
 }
 
 variable "administrator_login" {
-  description = "MySQL administrator login. Required when create_mode is Default."
+  description = "MySQL administrator login. Required when `create_mode = \"Default\"`."
   type        = string
   default     = null
 }
 
 variable "administrator_password" {
-  description = "MySQL administrator password. If not set, randomly generated"
+  description = "MySQL administrator password. If not set, password is randomly generated."
   type        = string
   default     = null
 }
 
 variable "allowed_cidrs" {
-  description = "Map of authorized CIDRs"
-  type        = map(string)
-  default     = {}
-}
-
-variable "extra_tags" {
-  description = "Map of custom tags"
+  description = "Map of allowed CIDRs."
   type        = map(string)
   default     = {}
 }
 
 variable "mysql_version" {
-  description = "MySQL server version. Valid values are `5.7` and `8.0.21`"
+  description = "MySQL server version. Valid values are `5.7` and `8.0.21`."
   type        = string
   default     = "8.0.21"
 }
 
-variable "mysql_options" {
-  description = "Map of MySQL configuration options: https://dev.mysql.com/doc/refman/8.0/en/server-system-variables.html. See README file for defaults."
+variable "options" {
+  description = "Map of MySQL configuration options: https://dev.mysql.com/doc/refman/8.0/en/server-system-variables.html. See README file for default values."
   type        = map(string)
   default     = {}
 }
 
-variable "mysql_recommended_options_enabled" {
-  description = "Whether this module recommended MySQL options are set."
+variable "recommended_options_enabled" {
+  description = "Whether or not to use recommended options."
   type        = bool
   nullable    = false
   default     = true
 }
 
-variable "mysql_audit_logs_enabled" {
+variable "audit_logs_enabled" {
   description = <<EOD
   Whether MySQL audit logs are enabled. Categories `CONNECTION`, `ADMIN`, `CONNECTION_V2`, `DCL`, `DDL`, `DML`, `DML_NONSELECT`, `DML_SELECT`, `GENERAL` and `TABLE_ACCESS` are set by default when enabled
-  and can be overridden with variable `mysql_options`. See https://learn.microsoft.com/en-us/azure/mysql/flexible-server/concepts-audit-logs#configure-audit-logging."
+  and can be overridden with `options` variable. See https://learn.microsoft.com/en-us/azure/mysql/flexible-server/concepts-audit-logs#configure-audit-logging."
 EOD
   type        = bool
   default     = false
@@ -82,7 +76,7 @@ EOD
 }
 
 variable "geo_redundant_backup_enabled" {
-  description = "Turn Geo-redundant server backups on/off. Not available for the Burstable tier."
+  description = "Enable or disable geo-redundant server backups. Not available for the burstable tier."
   type        = bool
   default     = true
 }
@@ -94,19 +88,22 @@ variable "create_mode" {
 }
 
 variable "backup_retention_days" {
-  description = "Backup retention days for the server, supported values are between `7` and `35` days."
+  description = "Backup retention days for the MySQL Flexible Server. Supported values are between `7` and `35` days."
   type        = number
   default     = 10
 }
 
 variable "databases" {
   description = "Map of databases with default collation and charset."
-  type        = map(map(string))
-  default     = {}
+  type = map(object({
+    charset   = optional(string, "utf8")
+    collation = optional(string, "utf8_general_ci")
+  }))
+  default = {}
 }
 
 variable "tier" {
-  description = "Tier for MySQL flexible server SKU. Possible values are: `GeneralPurpose`, `Burstable`, `MemoryOptimized`."
+  description = "Tier for MySQL Flexible Server SKU. Possible values are: `GeneralPurpose`, `Burstable` and `MemoryOptimized`."
   type        = string
   default     = "GeneralPurpose"
 }
@@ -118,13 +115,13 @@ variable "size" {
 }
 
 variable "delegated_subnet_id" {
-  description = "The ID of the virtual network subnet to create the MySQL Flexible Server."
+  description = "The ID of the Virtual Network Subnet to create the MySQL Flexible Server."
   type        = string
   default     = null
 }
 
 variable "private_dns_zone_id" {
-  description = "The ID of the private dns zone to create the MySQL Flexible Server."
+  description = "The ID of the Private DNS Zone to create the MySQL Flexible Server."
   type        = string
   default     = null
 }
@@ -136,7 +133,7 @@ variable "source_server_id" {
 }
 
 variable "high_availability" {
-  description = "Map of high availability configuration: https://docs.microsoft.com/en-us/azure/mysql/flexible-server/concepts-high-availability. `null` to disable high availability"
+  description = "Object of high availability configuration: https://docs.microsoft.com/en-us/azure/mysql/flexible-server/concepts-high-availability. `null` to disable high availability."
   type = object({
     mode                      = string
     standby_availability_zone = optional(number)
@@ -148,13 +145,13 @@ variable "high_availability" {
 }
 
 variable "maintenance_window" {
-  description = "Map of maintenance window configuration: https://docs.microsoft.com/en-us/azure/mysql/flexible-server/concepts-maintenance"
+  description = "Map of maintenance window configuration: https://docs.microsoft.com/en-us/azure/mysql/flexible-server/concepts-maintenance."
   type        = map(number)
   default     = null
 }
 
 variable "storage" {
-  description = "Map of the storage configuration"
+  description = "Object of storage configuration."
   type = object({
     auto_grow_enabled  = optional(bool, true)
     size_gb            = optional(number)
@@ -165,13 +162,13 @@ variable "storage" {
 }
 
 variable "ssl_enforced" {
-  description = "Enforce SSL connection on MySQL provider and set require_secure_transport on MySQL Server"
+  description = "Enforce SSL connection on MySQL provider. This sets the `require_secure_transport` option on the MySQL Flexible Server."
   type        = bool
   default     = true
 }
 
 variable "zone" {
-  description = "Specifies the Availability Zone in which this MySQL Flexible Server should be located. Possible values are 1, 2 and 3"
+  description = "Specifies the Availability Zone in which this MySQL Flexible Server should be located. Possible values are `1`, `2` and `3`."
   type        = number
   default     = null
 }
@@ -184,17 +181,17 @@ variable "identity_ids" {
 }
 
 variable "entra_authentication" {
-  description = "Azure Entra authentication configuration block for this Azure MySQL Flexible Server. You have to assign `Directory Readers` Azure Entra role to the User Assigned Identity, see [documentation](https://learn.microsoft.com/en-us/azure/mysql/flexible-server/how-to-azure-ad#configure-the-microsoft-entra-admin). See dedicated [example](examples/entra-auth/modules.tf)."
+  description = "Azure Entra authentication configuration block for this Azure MySQL Flexible Server. You have to assign the `Directory Readers` Azure Entra role to the User Assigned Identity, see [documentation](https://learn.microsoft.com/en-us/azure/mysql/flexible-server/how-to-azure-ad#configure-the-microsoft-entra-admin). See dedicated [example](examples/entra-auth/modules.tf)."
   type = object({
-    user_assigned_identity_id = optional(string, null)
-    login                     = optional(string, null)
-    object_id                 = optional(string, null)
+    user_assigned_identity_id = optional(string)
+    login                     = optional(string)
+    object_id                 = optional(string)
   })
   default = {}
 }
 
 variable "point_in_time_restore_time_in_utc" {
-  description = "The point in time to restore from creation_source_server_id when create_mode is PointInTimeRestore. Changing this forces a new MySQL Flexible Server to be created."
+  description = "The point in time to restore from `creation_source_server_id` when `create_mode = \"PointInTimeRestore\"`. Changing this forces a new MySQL Flexible Server to be created."
   type        = string
   default     = null
 }

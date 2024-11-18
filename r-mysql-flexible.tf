@@ -1,5 +1,18 @@
-resource "azurerm_mysql_flexible_server" "mysql_flexible_server" {
-  name = local.mysql_flexible_server_name
+resource "random_password" "administrator_password" {
+  count = var.administrator_password == null ? 1 : 0
+
+  length           = 32
+  special          = true
+  override_special = "@#%&*()-_=+[]{}<>:?"
+}
+
+moved {
+  from = random_password.mysql_administrator_password
+  to   = random_password.administrator_password
+}
+
+resource "azurerm_mysql_flexible_server" "main" {
+  name = local.name
 
   location            = var.location
   resource_group_name = var.resource_group_name
@@ -75,35 +88,59 @@ resource "azurerm_mysql_flexible_server" "mysql_flexible_server" {
   }
 }
 
-resource "azurerm_mysql_flexible_database" "mysql_flexible_db" {
-  for_each = var.databases
-
-  name                = var.use_caf_naming_for_databases ? data.azurecaf_name.mysql_flexible_databases[each.key].result : each.key
-  resource_group_name = var.resource_group_name
-  server_name         = azurerm_mysql_flexible_server.mysql_flexible_server.name
-  charset             = lookup(each.value, "charset", "utf8")
-  collation           = lookup(each.value, "collation", "utf8_general_ci")
+moved {
+  from = azurerm_mysql_flexible_server.mysql_flexible_server
+  to   = azurerm_mysql_flexible_server.main
 }
 
-resource "azurerm_mysql_flexible_server_configuration" "mysql_flexible_server_config" {
-  for_each = local.mysql_options
+resource "azurerm_mysql_flexible_database" "main" {
+  for_each = var.databases
+
+  name                = var.caf_naming_for_databases_enabled ? data.azurecaf_name.mysql_flexible_databases[each.key].result : each.key
+  resource_group_name = var.resource_group_name
+  server_name         = azurerm_mysql_flexible_server.main.name
+  charset             = each.value.charset
+  collation           = each.value.collation
+}
+
+moved {
+  from = azurerm_mysql_flexible_database.mysql_flexible_db
+  to   = azurerm_mysql_flexible_database.main
+}
+
+resource "azurerm_mysql_flexible_server_firewall_rule" "main" {
+  for_each = var.delegated_subnet_id == null ? var.allowed_cidrs : {}
 
   name                = each.key
   resource_group_name = var.resource_group_name
-  server_name         = azurerm_mysql_flexible_server.mysql_flexible_server.name
+  server_name         = azurerm_mysql_flexible_server.main.name
+  start_ip_address    = cidrhost(each.value, 0)
+  end_ip_address      = cidrhost(each.value, -1)
+}
+
+moved {
+  from = azurerm_mysql_flexible_server_firewall_rule.firewall_rules
+  to   = azurerm_mysql_flexible_server_firewall_rule.main
+}
+
+resource "azurerm_mysql_flexible_server_configuration" "main" {
+  for_each = local.options
+
+  name                = each.key
+  resource_group_name = var.resource_group_name
+  server_name         = azurerm_mysql_flexible_server.main.name
   value               = each.value
 }
 
-resource "random_password" "mysql_administrator_password" {
-  length           = 32
-  special          = true
-  override_special = "@#%&*()-_=+[]{}<>:?"
+moved {
+  from = azurerm_mysql_flexible_server_configuration.mysql_flexible_server_config
+  to   = azurerm_mysql_flexible_server_configuration.main
 }
 
 resource "azurerm_mysql_flexible_server_active_directory_administrator" "main" {
   count = length(var.entra_authentication.object_id[*]) > 0 ? 1 : 0
 
-  server_id   = azurerm_mysql_flexible_server.mysql_flexible_server.id
+  server_id   = azurerm_mysql_flexible_server.main.id
   identity_id = var.entra_authentication.user_assigned_identity_id
   login       = var.entra_authentication.login
   object_id   = var.entra_authentication.object_id
