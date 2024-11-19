@@ -19,10 +19,10 @@ locals {
       max_allowed_packet              = "1073741824" # 1GB
       explicit_defaults_for_timestamp = "OFF"
       sql_mode                        = "ERROR_FOR_DIVISION_BY_ZERO,STRICT_TRANS_TABLES"
-      transaction_isolation           = "READ-COMMITTED"
     },
     var.mysql_version != "5.7" ? {
       sql_generate_invisible_primary_key = "OFF"
+      transaction_isolation              = "READ-COMMITTED"
     } : {},
   )
 
