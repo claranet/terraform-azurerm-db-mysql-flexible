@@ -24,27 +24,27 @@ output "module_diagnostics" {
 }
 
 output "id" {
-  description = "ID of the Azure MySQL Flexible Server."
+  description = "ID of the Azure MySQL Flexible server."
   value       = azurerm_mysql_flexible_server.main.id
 }
 
 output "name" {
-  description = "Name of the Azure MySQL Flexible Server."
+  description = "Name of the Azure MySQL Flexible server."
   value       = azurerm_mysql_flexible_server.main.name
 }
 
 output "fqdn" {
-  description = "FQDN of the MySQL Flexible Server."
+  description = "FQDN of the MySQL Flexible server."
   value       = azurerm_mysql_flexible_server.main.fqdn
 }
 
 output "administrator_login" {
-  description = "Administrator login for MySQL Flexible Server."
+  description = "Administrator login for MySQL Flexible server."
   value       = azurerm_mysql_flexible_server.main.administrator_login
 }
 
 output "administrator_password" {
-  description = "Administrator password for MySQL Flexible Server."
+  description = "Administrator password for MySQL Flexible server."
   value       = azurerm_mysql_flexible_server.main.administrator_password
   sensitive   = true
 }
@@ -55,7 +55,7 @@ output "public_network_access_enabled" {
 }
 
 output "replica_capacity" {
-  description = "The maximum number of replicas that a primary MySQL Flexible Server can have."
+  description = "The maximum number of replicas that a primary MySQL Flexible server can have."
   value       = azurerm_mysql_flexible_server.main.replica_capacity
 }
 

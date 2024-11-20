@@ -41,13 +41,13 @@ variable "administrator_password" {
 }
 
 variable "tier" {
-  description = "Tier for MySQL Flexible Server SKU. Possible values are: `GeneralPurpose`, `Burstable` and `MemoryOptimized`."
+  description = "Tier for MySQL Flexible server SKU. Possible values are: `GeneralPurpose`, `Burstable` and `MemoryOptimized`."
   type        = string
   default     = "GeneralPurpose"
 }
 
 variable "size" {
-  description = "The size for the MySQL Flexible Server."
+  description = "The size for the MySQL Flexible server."
   type        = string
   default     = "Standard_D2ds_v4"
 }
@@ -59,21 +59,21 @@ variable "mysql_version" {
 }
 
 variable "delegated_subnet_id" {
-  description = "The ID of the Virtual Network Subnet to create the MySQL Flexible Server."
+  description = "The ID of the Virtual Network Subnet to create the MySQL Flexible server."
   type        = string
   default     = null
 }
 
 variable "private_dns_zone_id" {
-  description = "The ID of the Private DNS Zone to create the MySQL Flexible Server."
+  description = "The ID of the Private DNS Zone to create the MySQL Flexible server."
   type        = string
   default     = null
 }
 
 variable "backup_retention_days" {
-  description = "Backup retention days for the MySQL Flexible Server. Supported values are between 7 and 35 days."
+  description = "Backup retention days for the MySQL Flexible server. Supported values are between 7 and 35 days."
   type        = number
-  default     = 10
+  default     = 7
 }
 
 variable "geo_redundant_backup_enabled" {
@@ -89,19 +89,19 @@ variable "create_mode" {
 }
 
 variable "source_server_id" {
-  description = "The resource ID of the source MySQL Flexible Server to be restored."
+  description = "The resource ID of the source MySQL Flexible server to be restored."
   type        = string
   default     = null
 }
 
 variable "point_in_time_restore_time_in_utc" {
-  description = "The point in time to restore from `creation_source_server_id` when `create_mode = \"PointInTimeRestore\"`. Changing this forces a new MySQL Flexible Server to be created."
+  description = "The point in time to restore from `creation_source_server_id` when `create_mode = \"PointInTimeRestore\"`. Changing this forces a new MySQL Flexible server to be created."
   type        = string
   default     = null
 }
 
 variable "high_availability" {
-  description = "Object of high availability configuration: https://docs.microsoft.com/en-us/azure/mysql/flexible-server/concepts-high-availability. `null` to disable high availability."
+  description = "Object of high availability configuration. See [documentation](https://docs.microsoft.com/en-us/azure/mysql/flexible-server/concepts-high-availability). `null` to disable high availability."
   type = object({
     mode                      = optional(string, "SameZone")
     standby_availability_zone = optional(number, 1)
@@ -110,7 +110,7 @@ variable "high_availability" {
 }
 
 variable "maintenance_window" {
-  description = "Map of maintenance window configuration: https://docs.microsoft.com/en-us/azure/mysql/flexible-server/concepts-maintenance."
+  description = "Map of maintenance window configuration. See [documentation](https://docs.microsoft.com/en-us/azure/mysql/flexible-server/concepts-maintenance)."
   type = object({
     day_of_week  = optional(number, 0)
     start_hour   = optional(number, 0)
@@ -131,14 +131,14 @@ variable "storage" {
 }
 
 variable "identity_ids" {
-  description = "A list of User Assigned Managed Identity IDs to be assigned to this MySQL Flexible Server."
+  description = "A list of User Assigned Managed Identity IDs to be assigned to this MySQL Flexible server."
   type        = list(string)
   default     = []
   nullable    = false
 }
 
 variable "zone" {
-  description = "Specifies the Availability Zone in which this MySQL Flexible Server should be located. Possible values are `1`, `2` and `3`."
+  description = "Specifies the Availability Zone in which this MySQL Flexible server should be located. Possible values are `1`, `2` and `3`."
   type        = number
   default     = null
 }
@@ -159,7 +159,7 @@ variable "allowed_cidrs" {
 }
 
 variable "options" {
-  description = "Map of MySQL configuration options: https://dev.mysql.com/doc/refman/8.0/en/server-system-variables.html. See README for default values."
+  description = "Map of MySQL configuration options. See [documentation](https://dev.mysql.com/doc/refman/8.0/en/server-system-variables.html). See README for default values."
   type        = map(string)
   default     = {}
 }
@@ -167,7 +167,7 @@ variable "options" {
 variable "audit_logs_enabled" {
   description = <<EOD
   Whether MySQL audit logs are enabled. Categories `CONNECTION`, `ADMIN`, `CONNECTION_V2`, `DCL`, `DDL`, `DML`, `DML_NONSELECT`, `DML_SELECT`, `GENERAL` and `TABLE_ACCESS` are set by default when enabled
-  and can be overridden with `options` variable. See https://learn.microsoft.com/en-us/azure/mysql/flexible-server/concepts-audit-logs#configure-audit-logging."
+  and can be overridden with `options` variable. See [documentation](https://learn.microsoft.com/en-us/azure/mysql/flexible-server/concepts-audit-logs#configure-audit-logging)."
 EOD
   type        = bool
   default     = false
@@ -182,13 +182,13 @@ variable "recommended_options_enabled" {
 }
 
 variable "ssl_enforced" {
-  description = "Enforce SSL connection on MySQL provider. This sets the `require_secure_transport` option on the MySQL Flexible Server."
+  description = "Enforce SSL connection on MySQL provider. This sets the `require_secure_transport` option on the MySQL Flexible server."
   type        = bool
   default     = true
 }
 
 variable "entra_authentication" {
-  description = "Azure Entra authentication configuration block for this Azure MySQL Flexible Server. You have to assign the `Directory Readers` Azure Entra role to the User Assigned Identity, see [documentation](https://learn.microsoft.com/en-us/azure/mysql/flexible-server/how-to-azure-ad#configure-the-microsoft-entra-admin). See dedicated [example](examples/entra-auth/modules.tf)."
+  description = "Azure Entra authentication configuration block for this Azure MySQL Flexible server. You have to assign the `Directory Readers` Azure Entra role to the User Assigned Identity, see [documentation](https://learn.microsoft.com/en-us/azure/mysql/flexible-server/how-to-azure-ad#configure-the-microsoft-entra-admin). See dedicated [example](examples/entra-auth/modules.tf)."
   type = object({
     user_assigned_identity_id = optional(string)
     login                     = optional(string)

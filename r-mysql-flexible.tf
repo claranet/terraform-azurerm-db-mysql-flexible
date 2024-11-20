@@ -92,7 +92,7 @@ moved {
 resource "azurerm_mysql_flexible_database" "main" {
   for_each = var.databases
 
-  name                = var.caf_naming_for_databases_enabled ? data.azurecaf_name.mysql_flexible_databases[each.key].result : each.key
+  name                = each.key
   resource_group_name = var.resource_group_name
   server_name         = azurerm_mysql_flexible_server.main.name
   charset             = each.value.charset
