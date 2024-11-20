@@ -164,7 +164,7 @@ module "mysql_users" {
 | administrator\_password | MySQL administrator password. If not set, password is randomly generated. | `string` | `null` | no |
 | allowed\_cidrs | Map of allowed CIDRs. | `map(string)` | `{}` | no |
 | audit\_logs\_enabled | Whether MySQL audit logs are enabled. Categories `CONNECTION`, `ADMIN`, `CONNECTION_V2`, `DCL`, `DDL`, `DML`, `DML_NONSELECT`, `DML_SELECT`, `GENERAL` and `TABLE_ACCESS` are set by default when enabled<br/>  and can be overridden with `options` variable. See https://learn.microsoft.com/en-us/azure/mysql/flexible-server/concepts-audit-logs#configure-audit-logging." | `bool` | `false` | no |
-| backup\_retention\_days | Backup retention days for the MySQL Flexible Server. Supported values are between `7` and `35` days. | `number` | `10` | no |
+| backup\_retention\_days | Backup retention days for the MySQL Flexible Server. Supported values are between 7 and 35 days. | `number` | `10` | no |
 | caf\_naming\_for\_databases\_enabled | Use the Azure CAF naming provider to generate databases name. | `bool` | `false` | no |
 | client\_name | Client name/account used in naming. | `string` | n/a | yes |
 | create\_mode | The creation mode which can be used to restore or replicate existing servers. | `string` | `"Default"` | no |
@@ -177,18 +177,18 @@ module "mysql_users" {
 | environment | Project environment. | `string` | n/a | yes |
 | extra\_tags | Map of custom tags. | `map(string)` | `{}` | no |
 | geo\_redundant\_backup\_enabled | Enable or disable geo-redundant server backups. Not available for the burstable tier. | `bool` | `true` | no |
-| high\_availability | Object of high availability configuration: https://docs.microsoft.com/en-us/azure/mysql/flexible-server/concepts-high-availability. `null` to disable high availability. | <pre>object({<br/>    mode                      = string<br/>    standby_availability_zone = optional(number)<br/>  })</pre> | <pre>{<br/>  "mode": "SameZone",<br/>  "standby_availability_zone": 1<br/>}</pre> | no |
+| high\_availability | Object of high availability configuration: https://docs.microsoft.com/en-us/azure/mysql/flexible-server/concepts-high-availability. `null` to disable high availability. | <pre>object({<br/>    mode                      = optional(string, "SameZone")<br/>    standby_availability_zone = optional(number, 1)<br/>  })</pre> | `{}` | no |
 | identity\_ids | A list of User Assigned Managed Identity IDs to be assigned to this MySQL Flexible Server. | `list(string)` | `[]` | no |
 | location | Azure location. | `string` | n/a | yes |
 | location\_short | Short string for Azure location. | `string` | n/a | yes |
 | logs\_categories | Log categories to send to destinations. | `list(string)` | `null` | no |
 | logs\_destinations\_ids | List of destination resources IDs for logs diagnostic destination.<br/>Can be `Storage Account`, `Log Analytics Workspace` and `Event Hub`. No more than one of each can be set.<br/>If you want to use Azure EventHub as a destination, you must provide a formatted string containing both the EventHub Namespace authorization send ID and the EventHub name (name of the queue to use in the Namespace) separated by the <code>&#124;</code> character. | `list(string)` | n/a | yes |
 | logs\_metrics\_categories | Metrics categories to send to destinations. | `list(string)` | `null` | no |
-| maintenance\_window | Map of maintenance window configuration: https://docs.microsoft.com/en-us/azure/mysql/flexible-server/concepts-maintenance. | `map(number)` | `null` | no |
+| maintenance\_window | Map of maintenance window configuration: https://docs.microsoft.com/en-us/azure/mysql/flexible-server/concepts-maintenance. | <pre>object({<br/>    day_of_week  = optional(number, 0)<br/>    start_hour   = optional(number, 0)<br/>    start_minute = optional(number, 0)<br/>  })</pre> | `null` | no |
 | mysql\_version | MySQL server version. Valid values are `5.7` and `8.0.21`. | `string` | `"8.0.21"` | no |
 | name\_prefix | Optional prefix for the generated name. | `string` | `""` | no |
 | name\_suffix | Optional suffix for the generated name. | `string` | `""` | no |
-| options | Map of MySQL configuration options: https://dev.mysql.com/doc/refman/8.0/en/server-system-variables.html. See README file for default values. | `map(string)` | `{}` | no |
+| options | Map of MySQL configuration options: https://dev.mysql.com/doc/refman/8.0/en/server-system-variables.html. See README for default values. | `map(string)` | `{}` | no |
 | point\_in\_time\_restore\_time\_in\_utc | The point in time to restore from `creation_source_server_id` when `create_mode = "PointInTimeRestore"`. Changing this forces a new MySQL Flexible Server to be created. | `string` | `null` | no |
 | private\_dns\_zone\_id | The ID of the Private DNS Zone to create the MySQL Flexible Server. | `string` | `null` | no |
 | recommended\_options\_enabled | Whether or not to use recommended options. | `bool` | `true` | no |
