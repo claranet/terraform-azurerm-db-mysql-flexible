@@ -1,3 +1,37 @@
+## 8.0.0 (2024-11-21)
+
+### ⚠ BREAKING CHANGES
+
+* **AZ-1088:** module v8 structure and updates
+
+### Features
+
+* **AZ-1088:** apply suggestions 368e83c
+* **AZ-1088:** module v8 structure and updates 1117d23
+* **AZ-1088:** revamping and variable updates b3e7b57
+
+### Bug Fixes
+
+* **AZ-1088:** `transaction_isolation` option not working in mysql 5.7 96e4224
+
+### Miscellaneous Chores
+
+* **deps:** update dependency claranet/diagnostic-settings/azurerm to v7 7620515
+* **deps:** update dependency opentofu to v1.8.3 ee1d3f9
+* **deps:** update dependency opentofu to v1.8.4 b7f99e3
+* **deps:** update dependency pre-commit to v4 98a7a96
+* **deps:** update dependency pre-commit to v4.0.1 571bb75
+* **deps:** update dependency tflint to v0.54.0 0e11ca6
+* **deps:** update dependency trivy to v0.56.0 43051e2
+* **deps:** update dependency trivy to v0.56.1 6b1af1a
+* **deps:** update dependency trivy to v0.56.2 18bc066
+* **deps:** update dependency trivy to v0.57.1 531bb1c
+* **deps:** update pre-commit hook pre-commit/pre-commit-hooks to v5 4d4bccb
+* **deps:** update pre-commit hook tofuutils/pre-commit-opentofu to v2.1.0 89d5ddc
+* **deps:** update tools 6f5148d
+* prepare for new examples structure f02e35f
+* update examples structure cd10df7
+
 ## 7.7.0 (2024-10-03)
 
 ### Features
