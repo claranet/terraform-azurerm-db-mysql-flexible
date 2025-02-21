@@ -57,10 +57,8 @@ module "mysql_users" {
   source  = "claranet/users/mysql"
   version = "x.x.x"
 
-  for_each = module.mysql_flexible.databases_names
+  user      = "claranet-db"
+  databases = module.mysql_flexible.databases_names
 
-  user     = each.key
-  database = each.key
-
-  user_suffix_enabled = true
+  # user_suffix_enabled = true
 }
