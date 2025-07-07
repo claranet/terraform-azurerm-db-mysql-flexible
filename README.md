@@ -144,6 +144,7 @@ module "mysql_users" {
 
 | Name | Type |
 |------|------|
+| [azurerm_data_protection_backup_instance_mysql_flexible_server.main](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/data_protection_backup_instance_mysql_flexible_server) | resource |
 | [azurerm_mysql_flexible_database.main](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/mysql_flexible_database) | resource |
 | [azurerm_mysql_flexible_server.main](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/mysql_flexible_server) | resource |
 | [azurerm_mysql_flexible_server_active_directory_administrator.main](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/mysql_flexible_server_active_directory_administrator) | resource |
@@ -162,6 +163,7 @@ module "mysql_users" {
 | allowed\_cidrs | Map of allowed CIDRs. | `map(string)` | `{}` | no |
 | audit\_logs\_enabled | Whether MySQL audit logs are enabled. Categories `CONNECTION`, `ADMIN`, `CONNECTION_V2`, `DCL`, `DDL`, `DML`, `DML_NONSELECT`, `DML_SELECT`, `GENERAL` and `TABLE_ACCESS` are set by default when enabled<br/>  and can be overridden with `options` variable. See [documentation](https://learn.microsoft.com/en-us/azure/mysql/flexible-server/concepts-audit-logs#configure-audit-logging)." | `bool` | `false` | no |
 | backup\_retention\_days | Backup retention days for the MySQL Flexible server. Supported values are between 7 and 35 days. | `number` | `7` | no |
+| backup\_vault\_policy | Backup vault policy configuration to use for MySQL Flexible Long term retention backups. | <pre>object(<br/>    {<br/>      policy_id       = string,<br/>      backup_vault_id = string<br/>    }<br/><br/>  )</pre> | `null` | no |
 | client\_name | Client name/account used in naming. | `string` | n/a | yes |
 | create\_mode | The creation mode which can be used to restore or replicate existing servers. | `string` | `"Default"` | no |
 | custom\_name | Custom server name. | `string` | `""` | no |
