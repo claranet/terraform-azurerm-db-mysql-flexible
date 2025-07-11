@@ -199,12 +199,9 @@ variable "entra_authentication" {
 
 variable "backup_vault_policy" {
   description = "Backup vault policy configuration to use for MySQL Flexible Long term retention backups."
-  type = object(
-    {
-      policy_id       = string
-      backup_vault_id = string
-    }
-
-  )
+  type = object({
+    policy_id       = string
+    backup_vault_id = string
+  })
   default = null
 }
