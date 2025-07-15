@@ -1,3 +1,36 @@
+## 8.1.0 (2025-07-15)
+
+### Features
+
+* **AZ-1580:** ✨ add MySQL backup policy resource 16f00fe
+
+### Miscellaneous Chores
+
+* **⚙️:** ✏️ update template identifier for MR review 4047cde
+* 🗑️ remove old commitlint configuration files 12344f4
+* **AZ-1580:** 🔧 update `AZURERM_PROVIDER_MIN_VERSION` to `4.9` 239506a
+* **AZ-1580:** 🔧 update `azurerm` provider version to `~> 4.9` d940910
+* **AZ-1580:** apply suggestion 960576c
+* **AZ-1580:** apply suggestion 7931404
+* **deps:** update dependency opentofu to v1.10.0 7bf5953
+* **deps:** update dependency opentofu to v1.10.1 716ecc1
+* **deps:** update dependency opentofu to v1.9.1 222854b
+* **deps:** update dependency pre-commit to v4.2.0 5eff6e8
+* **deps:** update dependency terraform-docs to v0.20.0 c378529
+* **deps:** update dependency tflint to v0.57.0 1055d1c
+* **deps:** update dependency tflint to v0.58.0 aa9d455
+* **deps:** update dependency tflint to v0.58.1 2337f71
+* **deps:** update dependency trivy to v0.60.0 b637307
+* **deps:** update dependency trivy to v0.61.1 0a8b8de
+* **deps:** update dependency trivy to v0.62.0 2ba4c57
+* **deps:** update dependency trivy to v0.62.1 e17569c
+* **deps:** update dependency trivy to v0.63.0 d23f802
+* **deps:** update pre-commit hook alessandrojcm/commitlint-pre-commit-hook to v9.22.0 04544cf
+* **deps:** update pre-commit hook tofuutils/pre-commit-opentofu to v2.2.0 193ae9e
+* **deps:** update pre-commit hook tofuutils/pre-commit-opentofu to v2.2.1 abcc014
+* **deps:** update tools d336565
+* **deps:** update tools 0e50999
+
 ## 8.0.1 (2025-02-21)
 
 ### Documentation
