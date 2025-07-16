@@ -23,8 +23,9 @@ resource "azurerm_mysql_flexible_server" "main" {
   sku_name = join("_", [lookup(local.tier_map, var.tier, "GeneralPurpose"), var.size])
   version  = var.mysql_version
 
-  delegated_subnet_id = var.delegated_subnet_id
-  private_dns_zone_id = var.private_dns_zone_id
+  public_network_access = var.delegated_subnet_id != null && var.private_dns_zone_id != null ? "Disabled" : (var.public_network_access_enabled ? "Enabled" : "Disabled")
+  delegated_subnet_id   = var.delegated_subnet_id
+  private_dns_zone_id   = var.private_dns_zone_id
 
   backup_retention_days        = var.backup_retention_days
   geo_redundant_backup_enabled = var.geo_redundant_backup_enabled
