@@ -1,3 +1,13 @@
+## 8.2.0 (2025-07-18)
+
+### Features
+
+* **AZ-1587:** add public_network_access_enabled variable d940a8e
+
+### Miscellaneous Chores
+
+* **deps:** update dependency opentofu to v1.10.3 61f0205
+
 ## 8.1.0 (2025-07-15)
 
 ### Features
