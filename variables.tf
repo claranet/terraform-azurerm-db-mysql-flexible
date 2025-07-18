@@ -58,6 +58,12 @@ variable "mysql_version" {
   default     = "8.0.21"
 }
 
+variable "public_network_access_enabled" {
+  description = "Whether approved public traffic is allowed through the firewall to this server."
+  type        = bool
+  default     = false
+}
+
 variable "delegated_subnet_id" {
   description = "The ID of the Virtual Network Subnet to create the MySQL Flexible server."
   type        = string

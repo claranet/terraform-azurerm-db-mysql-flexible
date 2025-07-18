@@ -131,7 +131,7 @@ module "mysql_users" {
 | Name | Version |
 |------|---------|
 | azurecaf | ~> 1.2.28 |
-| azurerm | ~> 4.9 |
+| azurerm | ~> 4.26 |
 | random | >= 2.0 |
 
 ## Modules
@@ -189,6 +189,7 @@ module "mysql_users" {
 | options | Map of MySQL configuration options. See [documentation](https://dev.mysql.com/doc/refman/8.0/en/server-system-variables.html). See README for default values. | `map(string)` | `{}` | no |
 | point\_in\_time\_restore\_time\_in\_utc | The point in time to restore from `creation_source_server_id` when `create_mode = "PointInTimeRestore"`. Changing this forces a new MySQL Flexible server to be created. | `string` | `null` | no |
 | private\_dns\_zone\_id | The ID of the Private DNS Zone to create the MySQL Flexible server. | `string` | `null` | no |
+| public\_network\_access\_enabled | Whether approved public traffic is allowed through the firewall to this server. | `bool` | `false` | no |
 | recommended\_options\_enabled | Whether or not to use recommended options. | `bool` | `true` | no |
 | resource\_group\_name | Resource Group name. | `string` | n/a | yes |
 | size | The size for the MySQL Flexible server. | `string` | `"Standard_D2ds_v4"` | no |
