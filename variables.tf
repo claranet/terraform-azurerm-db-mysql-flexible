@@ -64,16 +64,20 @@ variable "public_network_access_enabled" {
   default     = false
 }
 
-variable "delegated_subnet_id" {
+variable "delegated_subnet" {
   description = "The ID of the Virtual Network Subnet to create the MySQL Flexible server."
-  type        = string
-  default     = null
+  type = object({
+    id = string
+  })
+  default = null
 }
 
-variable "private_dns_zone_id" {
+variable "private_dns_zone" {
   description = "The ID of the Private DNS Zone to create the MySQL Flexible server."
-  type        = string
-  default     = null
+  type = object({
+    id = string
+  })
+  default = null
 }
 
 variable "backup_retention_days" {
@@ -162,6 +166,13 @@ variable "allowed_cidrs" {
   description = "Map of allowed CIDRs."
   type        = map(string)
   default     = {}
+}
+
+variable "allowed_azure_services" {
+  description = "Whether to allow Azure services to access the MySQL Flexible server."
+  type        = bool
+  default     = false
+  nullable    = false
 }
 
 variable "options" {

@@ -149,6 +149,7 @@ module "mysql_users" {
 | [azurerm_mysql_flexible_server.main](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/mysql_flexible_server) | resource |
 | [azurerm_mysql_flexible_server_active_directory_administrator.main](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/mysql_flexible_server_active_directory_administrator) | resource |
 | [azurerm_mysql_flexible_server_configuration.main](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/mysql_flexible_server_configuration) | resource |
+| [azurerm_mysql_flexible_server_firewall_rule.azure_services](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/mysql_flexible_server_firewall_rule) | resource |
 | [azurerm_mysql_flexible_server_firewall_rule.main](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/mysql_flexible_server_firewall_rule) | resource |
 | [random_password.administrator_password](https://registry.terraform.io/providers/hashicorp/random/latest/docs/resources/password) | resource |
 | [azurecaf_name.mysql_flexible_server](https://registry.terraform.io/providers/claranet/azurecaf/latest/docs/data-sources/name) | data source |
@@ -160,6 +161,7 @@ module "mysql_users" {
 |------|-------------|------|---------|:--------:|
 | administrator\_login | MySQL administrator login. Required when `create_mode = "Default"`. | `string` | `null` | no |
 | administrator\_password | MySQL administrator password. If not set, password is randomly generated. | `string` | `null` | no |
+| allowed\_azure\_services | Whether to allow Azure services to access the MySQL Flexible server. | `bool` | `false` | no |
 | allowed\_cidrs | Map of allowed CIDRs. | `map(string)` | `{}` | no |
 | audit\_logs\_enabled | Whether MySQL audit logs are enabled. Categories `CONNECTION`, `ADMIN`, `CONNECTION_V2`, `DCL`, `DDL`, `DML`, `DML_NONSELECT`, `DML_SELECT`, `GENERAL` and `TABLE_ACCESS` are set by default when enabled<br/>  and can be overridden with `options` variable. See [documentation](https://learn.microsoft.com/en-us/azure/mysql/flexible-server/concepts-audit-logs#configure-audit-logging)." | `bool` | `false` | no |
 | backup\_retention\_days | Backup retention days for the MySQL Flexible server. Supported values are between 7 and 35 days. | `number` | `7` | no |
@@ -169,7 +171,7 @@ module "mysql_users" {
 | custom\_name | Custom server name. | `string` | `""` | no |
 | databases | Map of databases with default collation and charset. | <pre>map(object({<br/>    charset   = optional(string, "utf8")<br/>    collation = optional(string, "utf8_general_ci")<br/>  }))</pre> | `{}` | no |
 | default\_tags\_enabled | Option to enable or disable default tags. | `bool` | `true` | no |
-| delegated\_subnet\_id | The ID of the Virtual Network Subnet to create the MySQL Flexible server. | `string` | `null` | no |
+| delegated\_subnet | The ID of the Virtual Network Subnet to create the MySQL Flexible server. | <pre>object({<br/>    id = string<br/>  })</pre> | `null` | no |
 | diagnostic\_settings\_custom\_name | Custom name of the diagnostics settings, name will be 'default' if not set. | `string` | `"default"` | no |
 | entra\_authentication | Azure Entra authentication configuration block for this Azure MySQL Flexible server. You have to assign the `Directory Readers` Azure Entra role to the User Assigned Identity, see [documentation](https://learn.microsoft.com/en-us/azure/mysql/flexible-server/how-to-azure-ad#configure-the-microsoft-entra-admin). See dedicated [example](examples/entra-auth/modules.tf). | <pre>object({<br/>    user_assigned_identity_id = optional(string)<br/>    login                     = optional(string)<br/>    object_id                 = optional(string)<br/>  })</pre> | `{}` | no |
 | environment | Project environment. | `string` | n/a | yes |
@@ -188,7 +190,7 @@ module "mysql_users" {
 | name\_suffix | Optional suffix for the generated name. | `string` | `""` | no |
 | options | Map of MySQL configuration options. See [documentation](https://dev.mysql.com/doc/refman/8.0/en/server-system-variables.html). See README for default values. | `map(string)` | `{}` | no |
 | point\_in\_time\_restore\_time\_in\_utc | The point in time to restore from `creation_source_server_id` when `create_mode = "PointInTimeRestore"`. Changing this forces a new MySQL Flexible server to be created. | `string` | `null` | no |
-| private\_dns\_zone\_id | The ID of the Private DNS Zone to create the MySQL Flexible server. | `string` | `null` | no |
+| private\_dns\_zone | The ID of the Private DNS Zone to create the MySQL Flexible server. | <pre>object({<br/>    id = string<br/>  })</pre> | `null` | no |
 | public\_network\_access\_enabled | Whether approved public traffic is allowed through the firewall to this server. | `bool` | `false` | no |
 | recommended\_options\_enabled | Whether or not to use recommended options. | `bool` | `true` | no |
 | resource\_group\_name | Resource Group name. | `string` | n/a | yes |
