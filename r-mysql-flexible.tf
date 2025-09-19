@@ -23,9 +23,9 @@ resource "azurerm_mysql_flexible_server" "main" {
   sku_name = join("_", [lookup(local.tier_map, var.tier, "GeneralPurpose"), var.size])
   version  = var.mysql_version
 
-  public_network_access = var.delegated_subnet_id != null && var.private_dns_zone_id != null ? "Disabled" : (var.public_network_access_enabled ? "Enabled" : "Disabled")
-  delegated_subnet_id   = var.delegated_subnet_id
-  private_dns_zone_id   = var.private_dns_zone_id
+  public_network_access = var.delegated_subnet != null && var.private_dns_zone != null ? "Disabled" : (var.public_network_access_enabled ? "Enabled" : "Disabled")
+  delegated_subnet_id   = one(var.delegated_subnet[*].id)
+  private_dns_zone_id   = one(var.private_dns_zone[*].id)
 
   backup_retention_days        = var.backup_retention_days
   geo_redundant_backup_enabled = var.geo_redundant_backup_enabled
@@ -106,7 +106,7 @@ moved {
 }
 
 resource "azurerm_mysql_flexible_server_firewall_rule" "main" {
-  for_each = var.delegated_subnet_id == null ? var.allowed_cidrs : {}
+  for_each = var.delegated_subnet == null ? var.allowed_cidrs : {}
 
   name                = each.key
   resource_group_name = var.resource_group_name
@@ -118,6 +118,17 @@ resource "azurerm_mysql_flexible_server_firewall_rule" "main" {
 moved {
   from = azurerm_mysql_flexible_server_firewall_rule.firewall_rules
   to   = azurerm_mysql_flexible_server_firewall_rule.main
+}
+
+# https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/mysql_flexible_server_firewall_rule#example-usage-allow-access-to-azure-services
+resource "azurerm_mysql_flexible_server_firewall_rule" "azure_services" {
+  count = var.delegated_subnet == null && var.allowed_azure_services ? 1 : 0
+
+  name                = "Azure-Services"
+  resource_group_name = var.resource_group_name
+  server_name         = azurerm_mysql_flexible_server.main.name
+  start_ip_address    = "0.0.0.0"
+  end_ip_address      = "0.0.0.0"
 }
 
 resource "azurerm_mysql_flexible_server_configuration" "main" {
