@@ -1,3 +1,21 @@
+## 8.3.0 (2025-09-19)
+
+### Features
+
+* ✨ add an option to allow Azure Services access on the MySQL flexible server c25d3e9
+
+### Miscellaneous Chores
+
+* **deps:** 🔗 bump AzureRM provider version to v4.31+ bcd5584
+* **deps:** update dependency claranet/diagnostic-settings/azurerm to ~> 8.1.0 a7a9c30
+* **deps:** update dependency opentofu to v1.10.6 90f52cc
+* **deps:** update dependency tflint to v0.59.1 86623cd
+* **deps:** update dependency trivy to v0.66.0 58b5157
+* **deps:** update pre-commit hook pre-commit/pre-commit-hooks to v6 bf447eb
+* **deps:** update terraform claranet/diagnostic-settings/azurerm to ~> 8.2.0 6b7b5d0
+* **deps:** update tools e644476
+* **deps:** update tools df250b3
+
 ## 8.2.0 (2025-07-18)
 
 ### Features
