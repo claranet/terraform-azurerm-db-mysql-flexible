@@ -168,7 +168,7 @@ variable "allowed_cidrs" {
   default     = {}
 }
 
-variable "allowed_azure_services" {
+variable "azure_services_access_enabled" {
   description = "Whether to allow Azure services to access the MySQL Flexible server."
   type        = bool
   default     = false

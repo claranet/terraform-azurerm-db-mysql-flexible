@@ -122,7 +122,7 @@ moved {
 
 # https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/mysql_flexible_server_firewall_rule#example-usage-allow-access-to-azure-services
 resource "azurerm_mysql_flexible_server_firewall_rule" "azure_services" {
-  count = var.delegated_subnet == null && var.allowed_azure_services ? 1 : 0
+  count = var.delegated_subnet == null && var.azure_services_access_enabled ? 1 : 0
 
   name                = "Azure-Services"
   resource_group_name = var.resource_group_name

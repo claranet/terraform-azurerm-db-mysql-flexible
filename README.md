@@ -161,9 +161,9 @@ module "mysql_users" {
 |------|-------------|------|---------|:--------:|
 | administrator\_login | MySQL administrator login. Required when `create_mode = "Default"`. | `string` | `null` | no |
 | administrator\_password | MySQL administrator password. If not set, password is randomly generated. | `string` | `null` | no |
-| allowed\_azure\_services | Whether to allow Azure services to access the MySQL Flexible server. | `bool` | `false` | no |
 | allowed\_cidrs | Map of allowed CIDRs. | `map(string)` | `{}` | no |
 | audit\_logs\_enabled | Whether MySQL audit logs are enabled. Categories `CONNECTION`, `ADMIN`, `CONNECTION_V2`, `DCL`, `DDL`, `DML`, `DML_NONSELECT`, `DML_SELECT`, `GENERAL` and `TABLE_ACCESS` are set by default when enabled<br/>  and can be overridden with `options` variable. See [documentation](https://learn.microsoft.com/en-us/azure/mysql/flexible-server/concepts-audit-logs#configure-audit-logging)." | `bool` | `false` | no |
+| azure\_services\_access\_enabled | Whether to allow Azure services to access the MySQL Flexible server. | `bool` | `false` | no |
 | backup\_retention\_days | Backup retention days for the MySQL Flexible server. Supported values are between 7 and 35 days. | `number` | `7` | no |
 | backup\_vault\_policy | Backup vault policy configuration to use for MySQL Flexible Long term retention backups. | <pre>object({<br/>    policy_id       = string<br/>    backup_vault_id = string<br/>  })</pre> | `null` | no |
 | client\_name | Client name/account used in naming. | `string` | n/a | yes |
