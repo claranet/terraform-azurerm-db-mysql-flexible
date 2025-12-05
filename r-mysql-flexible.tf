@@ -77,6 +77,7 @@ resource "azurerm_mysql_flexible_server" "main" {
     ignore_changes = [
       zone,
       high_availability[0].standby_availability_zone,
+      version, # https://github.com/hashicorp/terraform-provider-azurerm/issues/30487
     ]
     precondition {
       condition     = (var.storage.io_scaling_enabled && var.storage.iops == null) || (!var.storage.io_scaling_enabled && var.storage.iops != null)
