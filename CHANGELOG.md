@@ -1,3 +1,21 @@
+## 8.3.3 (2025-12-05)
+
+### Bug Fixes
+
+* 🐛 ignore `version` field to allow upgrading MySQL to 8.4 75d1a2b
+
+### Miscellaneous Chores
+
+* **deps:** update dependency opentofu to v1.10.7 ce0f526
+* **deps:** update dependency pre-commit to v4.4.0 24b7b42
+* **deps:** update dependency pre-commit to v4.5.0 70273e8
+* **deps:** update dependency tflint to v0.60.0 0ae84c0
+* **deps:** update dependency trivy to v0.67.1 e961ae4
+* **deps:** update dependency trivy to v0.67.2 5a9e5ea
+* **deps:** update dependency trivy to v0.68.1 b98a46f
+* **deps:** update pre-commit hook crate-ci/committed to v1.1.8 5f64d7e
+* **deps:** update pre-commit hook tofuutils/pre-commit-opentofu to v2.2.2 5d79e60
+
 ## 8.3.2 (2025-09-30)
 
 ### Code Refactoring
