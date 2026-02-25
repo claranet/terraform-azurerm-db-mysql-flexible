@@ -83,6 +83,7 @@ resource "azurerm_mysql_flexible_server" "main" {
       condition     = (var.storage.io_scaling_enabled && var.storage.iops == null) || (!var.storage.io_scaling_enabled && var.storage.iops != null)
       error_message = "You have to choose between enabling storage auto-scaling IO without defining storage IOPS or disabling storage auto-scaling IO with defined storage IOPS."
     }
+    prevent_destroy = true
   }
 }
 
@@ -99,6 +100,10 @@ resource "azurerm_mysql_flexible_database" "main" {
   server_name         = azurerm_mysql_flexible_server.main.name
   charset             = each.value.charset
   collation           = each.value.collation
+
+  lifecycle {
+    prevent_destroy = true
+  }
 }
 
 moved {
