@@ -129,7 +129,7 @@ module "mysql_users" {
 ## Providers
 
 | Name | Version |
-|------|---------|
+| ---- | ------- |
 | azurecaf | >= 1.2.28 |
 | azurerm | ~> 4.31 |
 | random | >= 2.0 |
@@ -137,13 +137,13 @@ module "mysql_users" {
 ## Modules
 
 | Name | Source | Version |
-|------|--------|---------|
+| ---- | ------ | ------- |
 | diagnostics | claranet/diagnostic-settings/azurerm | ~> 8.2.0 |
 
 ## Resources
 
 | Name | Type |
-|------|------|
+| ---- | ---- |
 | [azurerm_data_protection_backup_instance_mysql_flexible_server.main](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/data_protection_backup_instance_mysql_flexible_server) | resource |
 | [azurerm_mysql_flexible_database.main](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/mysql_flexible_database) | resource |
 | [azurerm_mysql_flexible_server.main](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/mysql_flexible_server) | resource |
@@ -158,7 +158,7 @@ module "mysql_users" {
 ## Inputs
 
 | Name | Description | Type | Default | Required |
-|------|-------------|------|---------|:--------:|
+| ---- | ----------- | ---- | ------- | :------: |
 | administrator\_login | MySQL administrator login. Required when `create_mode = "Default"`. | `string` | `null` | no |
 | administrator\_password | MySQL administrator password. If not set, password is randomly generated. | `string` | `null` | no |
 | allowed\_cidrs | Map of allowed CIDRs. | `map(string)` | `{}` | no |
@@ -205,7 +205,7 @@ module "mysql_users" {
 ## Outputs
 
 | Name | Description |
-|------|-------------|
+| ---- | ----------- |
 | administrator\_login | Administrator login for MySQL Flexible server. |
 | administrator\_password | Administrator password for MySQL Flexible server. |
 | databases\_ids | Map of databases IDs. |
