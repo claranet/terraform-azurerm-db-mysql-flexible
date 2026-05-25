@@ -198,7 +198,7 @@ module "mysql_users" {
 | source\_server\_id | The resource ID of the source MySQL Flexible server to be restored. | `string` | `null` | no |
 | ssl\_enforced | Enforce SSL connection on MySQL provider. This sets the `require_secure_transport` option on the MySQL Flexible server. | `bool` | `true` | no |
 | stack | Project stack name. | `string` | n/a | yes |
-| storage | Object of storage configuration. | <pre>object({<br/>    auto_grow_enabled  = optional(bool, true)<br/>    size_gb            = optional(number)<br/>    io_scaling_enabled = optional(bool, false)<br/>    iops               = optional(number)<br/>  })</pre> | `{}` | no |
+| storage | Object of storage configuration. | <pre>object({<br/>    auto_grow_enabled   = optional(bool, true)<br/>    size_gb             = optional(number)<br/>    io_scaling_enabled  = optional(bool, false)<br/>    iops                = optional(number)<br/>    log_on_disk_enabled = optional(bool, false)<br/>  })</pre> | `{}` | no |
 | tier | Tier for MySQL Flexible server SKU. Possible values are: `GeneralPurpose`, `Burstable` and `MemoryOptimized`. | `string` | `"GeneralPurpose"` | no |
 | zone | Specifies the Availability Zone in which this MySQL Flexible server should be located. Possible values are `1`, `2` and `3`. | `number` | `null` | no |
 

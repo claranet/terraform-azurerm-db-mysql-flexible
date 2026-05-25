@@ -54,10 +54,11 @@ resource "azurerm_mysql_flexible_server" "main" {
   dynamic "storage" {
     for_each = var.storage[*]
     content {
-      auto_grow_enabled  = var.storage.auto_grow_enabled
-      size_gb            = var.storage.size_gb
-      io_scaling_enabled = var.storage.io_scaling_enabled
-      iops               = var.storage.iops
+      auto_grow_enabled   = var.storage.auto_grow_enabled
+      size_gb             = var.storage.size_gb
+      io_scaling_enabled  = var.storage.io_scaling_enabled
+      iops                = var.storage.iops
+      log_on_disk_enabled = var.storage.log_on_disk_enabled
     }
   }
 
