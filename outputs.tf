@@ -1,21 +1,25 @@
 output "resource" {
   description = "Azure MySQL server resource object."
   value       = azurerm_mysql_flexible_server.main
+  sensitive   = true
 }
 
 output "resource_database" {
   description = "Azure MySQL database resource object."
   value       = azurerm_mysql_flexible_database.main
+  sensitive   = true
 }
 
 output "resource_configuration" {
   description = "Azure MySQL configuration resource object."
   value       = azurerm_mysql_flexible_server_configuration.main
+  sensitive   = true
 }
 
 output "resource_firewall_rule" {
   description = "Azure MySQL server firewall rule resource object."
   value       = azurerm_mysql_flexible_server_firewall_rule.main
+  sensitive   = true
 }
 
 output "module_diagnostics" {
