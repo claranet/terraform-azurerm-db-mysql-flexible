@@ -132,10 +132,11 @@ variable "maintenance_window" {
 variable "storage" {
   description = "Object of storage configuration."
   type = object({
-    auto_grow_enabled  = optional(bool, true)
-    size_gb            = optional(number)
-    io_scaling_enabled = optional(bool, false)
-    iops               = optional(number)
+    auto_grow_enabled   = optional(bool, true)
+    size_gb             = optional(number)
+    io_scaling_enabled  = optional(bool, false)
+    iops                = optional(number)
+    log_on_disk_enabled = optional(bool, false)
   })
   default = {}
 }
