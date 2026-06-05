@@ -1,3 +1,15 @@
+## 8.4.0 (2026-06-05)
+
+### Features
+
+* **AZ-1658:** Add storage_log_on_disk_enabled storage option 1b832a5
+
+### Miscellaneous Chores
+
+* **deps:** update dependency opentofu to v1.12.1 722e957
+* **deps:** update pre-commit hook tofuutils/pre-commit-opentofu to v2.4.0 e77a5d1
+* **deps:** update tools ab7688f
+
 ## 8.3.6 (2026-06-02)
 
 ### Bug Fixes
