@@ -55,7 +55,7 @@ output "administrator_password" {
 
 output "public_network_access_enabled" {
   description = "Is the public network access enabled?"
-  value       = azurerm_mysql_flexible_server.main.public_network_access_enabled
+  value       = azurerm_mysql_flexible_server.main.public_network_access == "Enabled"
 }
 
 output "replica_capacity" {
