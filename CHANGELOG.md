@@ -1,15 +1,3 @@
-## 8.5.0 (2026-08-24)
-
-### Features
-
-* **SREAA-368:** upgrade module to v9 (OpenTofu >= 1.12, AzureRM ~> 5.0) 5fedd75
-
-### Miscellaneous Chores
-
-* **deps:** update dependency opentofu to v1.12.5 622ced7
-* **deps:** update dependency tflint to v0.64.0 274305f
-* **v9:** 🐛 synchronize common files and docs b245c0a
-
 ## 8.4.1 (2026-07-20)
 
 ### Bug Fixes
