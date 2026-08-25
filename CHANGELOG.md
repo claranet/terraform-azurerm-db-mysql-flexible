@@ -1,3 +1,22 @@
+## 9.0.0 (2026-08-25)
+
+### ⚠ BREAKING CHANGES
+
+* **SREAA-368:** minimum OpenTofu version raised to 1.12 and AzureRM provider raised to ~> 5.0.
+  Briefly shipped as 8.5.0 by mistake, now released under the correct major.
+
+### Features
+
+* **SREAA-368:** release the v9 upgrade as a major version 0280c45
+* **SREAA-368:** upgrade module to v9 (OpenTofu >= 1.12, AzureRM ~> 5.0) 5fedd75
+
+### Miscellaneous Chores
+
+* **deps:** update dependency opentofu to v1.12.5 622ced7
+* **deps:** update dependency tflint to v0.64.0 274305f
+* **release:** 8.5.0 [skip ci] 9112f45
+* **v9:** 🐛 synchronize common files and docs b245c0a
+
 ## 8.4.1 (2026-07-20)
 
 ### Bug Fixes
