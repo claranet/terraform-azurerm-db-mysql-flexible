@@ -81,8 +81,8 @@ resource "azurerm_mysql_flexible_server" "main" {
       version, # https://github.com/hashicorp/terraform-provider-azurerm/issues/30487
     ]
     precondition {
-      condition     = (var.storage.io_scaling_enabled && var.storage.iops == null) || (!var.storage.io_scaling_enabled && var.storage.iops != null)
-      error_message = "You have to choose between enabling storage auto-scaling IO without defining storage IOPS or disabling storage auto-scaling IO with defined storage IOPS."
+      condition     = !(var.storage.io_scaling_enabled && var.storage.iops != null)
+      error_message = "`storage.iops` cannot be set when `storage.io_scaling_enabled` is true: either enable IO auto-scaling without IOPS, or disable it and optionally set fixed IOPS."
     }
     prevent_destroy = true
   }
