@@ -81,9 +81,13 @@ variable "private_dns_zone" {
 }
 
 variable "backup_retention_days" {
-  description = "Backup retention days for the MySQL Flexible server. Supported values are between 7 and 35 days."
+  description = "Backup retention days for the MySQL Flexible server. Value has to be between `1` and `35`. Defaults to `30` days. Passing `null` falls back to the provider default (`7` days), not `30`."
   type        = number
-  default     = 7
+  default     = 30
+  validation {
+    condition     = var.backup_retention_days == null || (var.backup_retention_days >= 1 && var.backup_retention_days <= 35)
+    error_message = "The `backup_retention_days` value must be between 1 and 35 days."
+  }
 }
 
 variable "geo_redundant_backup_enabled" {
