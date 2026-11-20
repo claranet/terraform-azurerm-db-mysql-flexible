@@ -1,3 +1,29 @@
+## 9.1.0 (2026-11-20)
+
+### Features
+
+* raise backup_retention_days default to 30 days ccfaaad
+
+### Bug Fixes
+
+* allow default storage settings in the io scaling/iops precondition 6414d5a
+
+### Continuous Integration
+
+* **release:** drop semantic-release-slack-bot, the receiver posts releases cecfb9b
+
+### Miscellaneous Chores
+
+* **deps:** ⬆️ update tools 🔗 7fac2ab
+* **deps:** update dependency opentofu to v1.13.0 23b2999
+* **deps:** update dependency opentofu to v1.13.1 9a51900
+* **deps:** update dependency opentofu to v1.13.2 3ffea62
+* **deps:** update dependency opentofu to v1.13.9 74e0b03
+* **deps:** update dependency terraform-docs to v0.25.1 3622a02
+* **deps:** update dependency tflint to v0.65.0 9b0df60
+* **deps:** update dependency tflint to v0.66.0 f2af04c
+* **deps:** update pre-commit hook crate-ci/committed to v1.1.12 7e995f9
+
 ## 9.0.0 (2026-08-25)
 
 ### ⚠ BREAKING CHANGES
